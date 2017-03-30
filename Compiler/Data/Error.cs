@@ -1,0 +1,14 @@
+﻿namespace Compiler.Data
+{
+    public struct Error
+    {
+        public Error(string message)
+        {
+            Message = message;
+        }
+
+        public string Message { get; }
+
+        // TODO more description fields
+    }
+}

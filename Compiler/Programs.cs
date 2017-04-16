@@ -30,7 +30,7 @@ namespace Compiler
                     var text = File.ReadAllText(fileName);
 
                     text = Regex.Replace(text, @"(;.*?)\n", "\r\n");
-                    text = Regex.Replace(text, @"\s{2,}", " ");
+                    text = Regex.Replace(text, @"[ ]{2,}", " ");
 
                     codeFiles.Add(text);
                 }

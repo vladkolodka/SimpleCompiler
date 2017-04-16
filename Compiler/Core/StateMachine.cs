@@ -25,9 +25,10 @@ namespace Compiler.Core
                 var state = _states.ElementAt(stateNumber);
                 var symbol = pool.Code[pool.CodePosition];
 
-                if ( /*stateNumber != 0 && */!HasNextSymbol(pool))
+                if (!HasNextSymbol(pool))
                 {
                     if (state.Transitions.ContainsKey(symbol)) state = _states.ElementAt(state.Transitions[symbol]);
+                    else return false;
 
                     // last chanse to determine token
                     if (!state.IsFinal) return false;
@@ -38,7 +39,6 @@ namespace Compiler.Core
                 }
                 if (!state.Transitions.ContainsKey(symbol)) return false;
                 // go to next state
-//                if(stateNumber == 0) pool.CodePosition--;
                 stateNumber = state.Transitions[symbol];
             }
         }

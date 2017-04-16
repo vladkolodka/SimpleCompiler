@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Compiler.Data;
 using Compiler.Module;
 
@@ -21,13 +22,13 @@ namespace Compiler.Core
 
             // create compiler modules chain
             _modules.Add(lexicalAnalyzer);
-            _modules.Add(new SyntaxAnalyzer());
-            _modules.Add(new SemanticAnalyzer());
+//            _modules.Add(new SyntaxAnalyzer());
+//            _modules.Add(new SemanticAnalyzer());
         }
 
         private void TokenFounded(Token token, int line)
         {
-            Console.WriteLine($"Token {token.Class}:{token.Id} founded on line {line + 1}");
+            Console.WriteLine($"Token {token.Class}:{token.Id} founded on line {line + 1} (token = '{Constraints.Instance.Tokens.OperationSigns.ElementAt(token.Id)}')");
         }
 
         public void Run()

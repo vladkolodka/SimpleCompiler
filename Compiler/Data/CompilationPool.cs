@@ -4,15 +4,15 @@ namespace Compiler.Data
 {
     public class CompilationPool
     {
-        public ICollection<Token> Tokens { get; } = new List<Token>();
-
         public CompilationPool(string code)
         {
             Code = code;
         }
 
-        public string Code { get; set; }
+        public ICollection<Token> Tokens { get; } = new List<Token>();
 
+        public string Code { get; set; }
+        public int CodePosition { get; set; } = 0;
         // TODO
     }
 }

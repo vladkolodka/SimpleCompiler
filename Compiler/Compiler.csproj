@@ -45,6 +45,7 @@
     <Compile Include="Core\StateMachine.cs" />
     <Compile Include="Core\Kernel.cs" />
     <Compile Include="Data\CompilationPool.cs" />
+    <Compile Include="Data\Constraints.cs" />
     <Compile Include="Data\Error.cs" />
     <Compile Include="Data\Identifier.cs" />
     <Compile Include="Data\State.cs" />
@@ -57,6 +58,11 @@
     <Compile Include="Module\SyntaxAnalyzer.cs" />
     <Compile Include="Programs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\StateMachines.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -67,28 +73,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tokens.resx</DependentUpon>
     </Compile>
+    <Compile Include="Util\Parser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\StateMachines.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StateMachines.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tokens.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Tokens.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ReservedWords.txt" />
+    <None Include="Resources\Tokens\OperationSigns.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\OperationSigns.txt" />
+    <None Include="Resources\StateMachiles\OperationSigns.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

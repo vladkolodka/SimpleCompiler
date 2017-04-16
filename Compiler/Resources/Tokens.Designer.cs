@@ -22,7 +22,7 @@ namespace Compiler.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Tokens {
+    internal class Tokens {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Compiler.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Compiler.Resources.Tokens", typeof(Tokens).Assembly);
@@ -51,7 +51,7 @@ namespace Compiler.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,13 +61,35 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to if
-        ///include
-        ///for.
+        ///   Looks up a localized string similar to &amp;
+        ///,
+        ///*
+        ////
+        ///;
+        ///:
+        ///(
+        ///)
+        ///&lt;
+        ///&gt;
+        ///=
+        ///&lt;=
+        ///&gt;=
+        ///*=
+        ////=
+        ///+=
+        ///-=
+        ///@&lt;
+        ///@&gt;
+        ///+
+        ///-
+        ///@
+        ///#
+        ///|
+        ///?.
         /// </summary>
-        public static string ReservedWords {
+        internal static string OperationSigns {
             get {
-                return ResourceManager.GetString("ReservedWords", resourceCulture);
+                return ResourceManager.GetString("OperationSigns", resourceCulture);
             }
         }
     }

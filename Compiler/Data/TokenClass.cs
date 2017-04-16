@@ -2,6 +2,11 @@
 {
     public enum TokenClass
     {
-        ReservedWord, Delmer, OperationSign, Identifier, Literal, ServiceWord
-   }
+        ReservedWord,
+        Delmer,
+        OperationSign,
+        Identifier,
+        Literal,
+        ServiceWord
+    }
 }

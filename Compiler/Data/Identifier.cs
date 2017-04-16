@@ -1,5 +1,7 @@
-﻿namespace Compiler.Data {
-    class Identifier {
+﻿namespace Compiler.Data
+{
+    internal class Identifier
+    {
         // TODO
     }
 }

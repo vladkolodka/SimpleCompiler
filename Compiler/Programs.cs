@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using Compiler.Core;
 using Compiler.Resources;
 
@@ -8,7 +9,7 @@ namespace Compiler
 {
     internal class Programs
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Start(args);
             Console.ReadKey();
@@ -18,23 +19,26 @@ namespace Compiler
         {
             if (fileNames.Length == 0)
             {
-                Console.WriteLine("You should enter file name!");
+                Console.WriteLine(Messages.InvalidFileName);
                 return;
             }
 
-            List<string> codeFiles = new List<string>();
+            var codeFiles = new List<string>();
             foreach (var fileName in fileNames)
-            {
                 try
                 {
-                    codeFiles.Add(File.ReadAllText(fileName));
+                    var text = File.ReadAllText(fileName);
+
+                    text = Regex.Replace(text, @"(;.*?)\n", "\r\n");
+                    text = Regex.Replace(text, @"\s{2,}", " ");
+
+                    codeFiles.Add(text);
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"File \"{fileName}\" not found!\nProcess terminated...");
+                    Console.WriteLine(Messages.FileNotFound, fileName);
                     return;
                 }
-            }
 
             var compiler = new Kernel(codeFiles);
             compiler.Run();

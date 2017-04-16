@@ -22,14 +22,14 @@ namespace Compiler.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class StateMachines {
+    internal class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal StateMachines() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Compiler.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Compiler.Resources.StateMachines", typeof(StateMachines).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Compiler.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,61 +61,21 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0
-        /// &amp; 1
-        /// , 2
-        /// * 3
-        /// / 4
-        /// ; 5
-        /// : 6
-        /// ( 7
-        /// ) 8
-        /// = 9
-        /// + 10
-        /// - 11
-        /// @ 12
-        /// # 13
-        /// | 14
-        /// ? 15
-        /// &lt; 16
-        /// &gt; 17
-        ///1 ! 1
-        ///2 ! 2
-        ///3 ! 3
-        /// = 18
-        ///4 ! 4
-        /// = 19
-        ///5 ! 5
-        ///6 ! 6
-        ///7 ! 7
-        ///8 ! 8
-        ///9 ! 11
-        ///10 ! 20
-        /// = 20
-        ///11 ! 21
-        /// = 21
-        ///12 ! 22
-        /// &lt; 22
-        /// &gt; 23
-        ///13 ! 23
-        ///14 ! 24
-        ///15 ! 25
-        ///16 ! 9
-        /// = 24
-        ///17 ! 10
-        /// = 25
-        ///18 ! 14
-        ///19 ! 15
-        ///20 ! 16
-        ///21 ! 17
-        ///22 ! 18
-        ///23 ! 19
-        ///24 ! 12
-        ///25 ! 13.
+        ///   Looks up a localized string similar to File &quot;{0}&quot; not found!
+        ///Process terminated....
         /// </summary>
-        internal static string OperationSigns {
+        internal static string FileNotFound {
             get {
-                return ResourceManager.GetString("OperationSigns", resourceCulture);
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You should enter file name!.
+        /// </summary>
+        internal static string InvalidFileName {
+            get {
+                return ResourceManager.GetString("InvalidFileName", resourceCulture);
             }
         }
     }

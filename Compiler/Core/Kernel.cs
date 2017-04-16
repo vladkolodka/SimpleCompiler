@@ -12,11 +12,22 @@ namespace Compiler.Core
 
         public Kernel(IEnumerable<string> codeFiles)
         {
+            // create compilation pool for each code file
             foreach (var codeFile in codeFiles) _compilationPools.Add(new CompilationPool(codeFile));
 
-            _modules.Add(new LexicalAnalyzer());
+            var lexicalAnalyzer = new LexicalAnalyzer();
+
+            lexicalAnalyzer.TokenFounded += TokenFounded;
+
+            // create compiler modules chain
+            _modules.Add(lexicalAnalyzer);
             _modules.Add(new SyntaxAnalyzer());
             _modules.Add(new SemanticAnalyzer());
+        }
+
+        private void TokenFounded(Token token, int line)
+        {
+            Console.WriteLine($"Token {token.Class}:{token.Id} founded on line {line + 1}");
         }
 
         public void Run()

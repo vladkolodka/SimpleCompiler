@@ -1,12 +1,10 @@
-﻿namespace Compiler.Data
+﻿namespace Compiler.Core
 {
     public enum TokenClass
     {
         ReservedWord,
-        Delmer,
         OperationSign,
         Identifier,
-        Literal,
-        ServiceWord
+        Literal
     }
 }

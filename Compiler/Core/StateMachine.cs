@@ -25,7 +25,7 @@ namespace Compiler.Core
                 var state = _states.ElementAt(stateNumber);
                 var symbol = pool.Code[pool.CodePosition];
 
-                if (!HasNextSymbol(pool))
+                if (!HasNextSymbol(pool, _searchSymbol))
                 {
                     if (state.Transitions.ContainsKey(symbol)) state = _states.ElementAt(state.Transitions[symbol]);
                     else return false;
@@ -54,15 +54,19 @@ namespace Compiler.Core
             return false;
         }
 
-        private bool HasNextSymbol(CompilationPool pool)
+        public static bool HasNextSymbol(CompilationPool pool, bool searchSymbol)
         {
             if (pool.CodePosition + 1 == pool.Code.Length) return false;
 
-            if (pool.Code[pool.CodePosition + 1] == 32) return false;
+            var next = pool.Code[pool.CodePosition + 1];
+            if (next == 32 || next == '\r' || next == '\n') return false;
+
+//            if (pool.Code[pool.CodePosition + 1] == 32) return false;
 
             // is current symbol belongs to token-class alphabet
-            return !_searchSymbol ||
-                   Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString());
+            return searchSymbol
+                ? Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString())
+                : !Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString());
         }
     }
 }

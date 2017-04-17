@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Compiler.Core;
 using Compiler.Data;
+using Compiler.Resources;
 
 namespace Compiler.Module
 {
@@ -10,7 +11,8 @@ namespace Compiler.Module
     {
         private readonly List<StateMachine> _stateMachines = new List<StateMachine>
         {
-            new StateMachine(TokenClass.OperationSign, Constraints.Instance.StateMachines.OperationSigns, true)
+            new StateMachine(TokenClass.OperationSign, Constraints.Instance.StateMachines.OperationSigns, true),
+            new StateMachine(TokenClass.ReservedWord, Constraints.Instance.StateMachines.ReservedWords)
         };
 
         public event Action<Token, int> TokenFounded;
@@ -51,14 +53,36 @@ namespace Compiler.Module
                     TokenFounded?.Invoke(compilationPool.Tokens.Last(), line);
                     continue;
                 }
-                else
-                {
-                    // token not found, trying to find identifier
-                    // if found, continue
-                }
+
+                // token not found, trying to find identifier
+                // if found, continue
+
+                // try determine literal
+                // if found, continue
+
+                Console.WriteLine(Messages.UnexpectedSymbol, GetNextPartOfLexem(compilationPool), line);
                 return false;
             }
             return true;
         }
+
+        private string GetNextPartOfLexem(CompilationPool compilationPool) {
+            var isSymbol = Constraints.Instance.Tokens.OperationSigns.Contains(compilationPool.Code[compilationPool.CodePosition].ToString());
+
+            var codePositionBackup = compilationPool.CodePosition;
+            var count = 1;
+
+            while (StateMachine.HasNextSymbol(compilationPool, isSymbol))
+            {
+                count++;
+                compilationPool.CodePosition++;
+            }
+
+            var str = compilationPool.Code.Substring(codePositionBackup, count);
+
+            compilationPool.CodePosition = codePositionBackup;
+            return str;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Compiler.Core;
 using Compiler.Data;
 
 namespace Compiler.Module

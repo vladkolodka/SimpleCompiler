@@ -1,0 +1,17 @@
+yes
+no
+as
+equals
+loop
+logical
+symbol
+number
+value
+collection
+on
+off
+sentence
+blockPr
+blockListN
+blockListM
+text

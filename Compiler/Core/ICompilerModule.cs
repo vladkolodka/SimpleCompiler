@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Compiler.Data;
 
-namespace Compiler.Module
+namespace Compiler.Core
 {
     public interface ICompilerModule
     {

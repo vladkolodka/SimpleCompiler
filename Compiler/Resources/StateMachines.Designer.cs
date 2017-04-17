@@ -118,5 +118,14 @@ namespace Compiler.Resources {
                 return ResourceManager.GetString("OperationSigns", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ReservedWords {
+            get {
+                return ResourceManager.GetString("ReservedWords", resourceCulture);
+            }
+        }
     }
 }

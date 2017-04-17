@@ -16,11 +16,15 @@ namespace Compiler.Data
         {
             public ICollection<State> OperationSigns { get; } =
                 Parser.ParseStateMachine(Resources.StateMachines.OperationSigns);
+
+            public ICollection<State> ReservedWords { get; } =
+                Parser.ParseStateMachine(Resources.StateMachines.ReservedWords);
         }
 
         public class TokenConstraint
         {
             public ICollection<string> OperationSigns { get; } = Parser.ParseTokens(Resources.Tokens.OperationSigns);
+            public ICollection<string> ReservedWords { get; } = Parser.ParseTokens(Resources.Tokens.ReservedWords);
         }
     }
 }

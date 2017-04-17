@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Compiler.Data;
 
-namespace Compiler.Data
+namespace Compiler.Core
 {
     public class CompilationPool
     {
@@ -13,6 +14,5 @@ namespace Compiler.Data
 
         public string Code { get; set; }
         public int CodePosition { get; set; } = 0;
-        // TODO
     }
 }

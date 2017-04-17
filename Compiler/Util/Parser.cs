@@ -20,7 +20,7 @@ namespace Compiler.Util
                     stateCollection.Last().Transitions.Add(blocks[1][0], Convert.ToInt32(blocks[2]));
                 // state declaration
                 else
-                    stateCollection.Add(new State(blocks.Length == 3 ? Convert.ToInt32(blocks[2]) - 1 : 0));
+                    stateCollection.Add(new State(blocks.Length == 3 ? Convert.ToInt32(blocks[2]) - 1 : -1));
             }
 
             return stateCollection;

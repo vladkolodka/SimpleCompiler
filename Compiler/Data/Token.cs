@@ -1,4 +1,6 @@
-﻿namespace Compiler.Data
+﻿using Compiler.Core;
+
+namespace Compiler.Data
 {
     public struct Token
     {

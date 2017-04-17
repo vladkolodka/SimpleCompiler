@@ -2,13 +2,13 @@
 {
     public struct Error
     {
-        public Error(string message)
+        public Error(string message, int line = 0)
         {
             Message = message;
+            Line = line;
         }
 
         public string Message { get; }
-
-        // TODO more description fields
+        public int Line { get; set; }
     }
 }

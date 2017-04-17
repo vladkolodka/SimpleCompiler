@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Compiler.Data;
 using Compiler.Module;
+using Compiler.Resources;
 
 namespace Compiler.Core
 {
@@ -26,9 +27,20 @@ namespace Compiler.Core
 //            _modules.Add(new SemanticAnalyzer());
         }
 
-        private void TokenFounded(Token token, int line)
+        private static void TokenFounded(Token token, int line)
         {
-            Console.WriteLine($"Token {token.Class}:{token.Id} founded on line {line + 1} (token = '{Constraints.Instance.Tokens.OperationSigns.ElementAt(token.Id)}')");
+            var tokenValue = string.Empty;
+
+            switch (token.Class)
+            {
+                case TokenClass.OperationSign:
+                    tokenValue = Constraints.Instance.Tokens.OperationSigns.ElementAt(token.Id);
+                    break;
+                case TokenClass.ReservedWord:
+                    tokenValue = Constraints.Instance.Tokens.ReservedWords.ElementAt(token.Id);
+                    break;
+            }
+            Console.WriteLine(Messages.TokenFounded, token.Class, token.Id, line + 1, tokenValue);
         }
 
         public void Run()

@@ -44,15 +44,15 @@
   <ItemGroup>
     <Compile Include="Core\StateMachine.cs" />
     <Compile Include="Core\Kernel.cs" />
-    <Compile Include="Data\CompilationPool.cs" />
+    <Compile Include="Core\CompilationPool.cs" />
     <Compile Include="Data\Constraints.cs" />
     <Compile Include="Data\Error.cs" />
     <Compile Include="Data\Identifier.cs" />
     <Compile Include="Data\State.cs" />
     <Compile Include="Data\Token.cs" />
-    <Compile Include="Data\TokenClass.cs" />
+    <Compile Include="Core\TokenClass.cs" />
     <Compile Include="Module\CompilerModuleBase.cs" />
-    <Compile Include="Module\ICompilerModule.cs" />
+    <Compile Include="Core\ICompilerModule.cs" />
     <Compile Include="Module\LexicalAnalyzer.cs" />
     <Compile Include="Module\SemanticAnalyzer.cs" />
     <Compile Include="Module\SyntaxAnalyzer.cs" />
@@ -97,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\StateMachiles\OperationSigns.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StateMachiles\ReservedWords.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tokens\ReservedWords.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

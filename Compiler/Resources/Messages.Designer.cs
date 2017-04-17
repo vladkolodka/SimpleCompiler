@@ -78,5 +78,23 @@ namespace Compiler.Resources {
                 return ResourceManager.GetString("InvalidFileName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token {0}:{1} founded on line {2} (token = &apos;{3}&apos;).
+        /// </summary>
+        internal static string TokenFounded {
+            get {
+                return ResourceManager.GetString("TokenFounded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: unexpected symbol &apos;{0}&apos; on line {1}..
+        /// </summary>
+        internal static string UnexpectedSymbol {
+            get {
+                return ResourceManager.GetString("UnexpectedSymbol", resourceCulture);
+            }
+        }
     }
 }

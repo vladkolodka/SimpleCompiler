@@ -46,7 +46,6 @@
     <Compile Include="Core\Kernel.cs" />
     <Compile Include="Core\CompilationPool.cs" />
     <Compile Include="Data\Constraints.cs" />
-    <Compile Include="Data\Error.cs" />
     <Compile Include="Data\Identifier.cs" />
     <Compile Include="Data\State.cs" />
     <Compile Include="Data\Token.cs" />

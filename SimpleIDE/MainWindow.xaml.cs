@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using SimpleIDE.Core;
 
 namespace SimpleIDE
 {
@@ -31,22 +31,7 @@ namespace SimpleIDE
 
                 File.WriteAllText(fileName, text);
 
-                var process = new Process
-                {
-                    StartInfo =
-                    {
-                        FileName = "compiler.exe",
-                        CreateNoWindow = true,
-                        Arguments = fileName,
-                        RedirectStandardOutput = true,
-                        UseShellExecute = false
-                    }
-                };
-                process.Start();
-
-                var result = process.StandardOutput.ReadToEnd();
-
-                new ResultsWindow(result).ShowDialog();
+                new ResultsWindow(new Compiler(new[] {fileName})).ShowDialog();
             }
             catch (Exception exception)
             {

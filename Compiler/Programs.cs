@@ -12,18 +12,17 @@ namespace Compiler
         private static void Main(string[] args)
         {
             Start(args);
-//            Console.ReadKey();
         }
 
-        private static void Start(string[] fileNames)
+        private static void Start(IReadOnlyCollection<string> fileNames)
         {
-            if (fileNames.Length == 0)
+            if (fileNames.Count == 0)
             {
                 Console.WriteLine(Messages.InvalidFileName);
                 return;
             }
 
-            var codeFiles = new List<string>();
+            var codeFiles = new Dictionary<string, string>();
             foreach (var fileName in fileNames)
                 try
                 {
@@ -32,7 +31,7 @@ namespace Compiler
                     text = Regex.Replace(text, @"(;.*?)\n", "\r\n");
                     text = Regex.Replace(text, @"[ ]{2,}", " ");
 
-                    codeFiles.Add(text);
+                    codeFiles.Add(fileName, text);
                 }
                 catch (Exception)
                 {

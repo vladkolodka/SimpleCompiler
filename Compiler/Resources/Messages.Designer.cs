@@ -61,7 +61,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -1 |{0}| File not found..
+        ///   Looks up a localized string similar to | -1 |{0}|File not found..
         /// </summary>
         internal static string FileNotFound {
             get {
@@ -70,7 +70,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -2 || You must specify the name of the file..
+        ///   Looks up a localized string similar to | -2 ||You must specify the name of the file..
         /// </summary>
         internal static string InvalidFileName {
             get {
@@ -79,7 +79,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1 |{0} {1} {2} {3}| Token found..
+        ///   Looks up a localized string similar to {0}|1|{1} {2} {3} {4}|Token found..
         /// </summary>
         internal static string TokenFounded {
             get {
@@ -88,7 +88,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -3 |{0} {1}| Unexpected symbol..
+        ///   Looks up a localized string similar to {0}|-3|{1} {2}|Unexpected symbol..
         /// </summary>
         internal static string UnexpectedSymbol {
             get {

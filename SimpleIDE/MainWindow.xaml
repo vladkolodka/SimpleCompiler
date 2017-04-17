@@ -8,17 +8,17 @@
         Title="Simple HTCL IDE" Height="350" Width="525">
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-            <Button Content="Compile" Click="CompileButton_OnClick"/>
+            <Button Content="Compile" Click="CompileButton_OnClick" />
         </ToolBar>
         <TabControl Name="FileTabs">
             <TabItem Header="File 1">
-                <TextBox/>
+                <TextBox />
             </TabItem>
             <TabItem Header="File 2">
-                <TextBox/>
+                <TextBox />
             </TabItem>
             <TabItem Header="File 3">
-                <TextBox/>
+                <TextBox />
             </TabItem>
         </TabControl>
     </DockPanel>

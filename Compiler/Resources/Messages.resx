@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InvalidFileName" xml:space="preserve">
-    <value>-2 || You must specify the name of the file.</value>
+    <value>| -2 ||You must specify the name of the file.</value>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>-1 |{0}| File not found.</value>
+    <value>| -1 |{0}|File not found.</value>
   </data>
   <data name="TokenFounded" xml:space="preserve">
-    <value>1 |{0} {1} {2} {3}| Token found.</value>
+    <value>{0}|1|{1} {2} {3} {4}|Token found.</value>
   </data>
   <data name="UnexpectedSymbol" xml:space="preserve">
-    <value>-3 |{0} {1}| Unexpected symbol.</value>
+    <value>{0}|-3|{1} {2}|Unexpected symbol.</value>
   </data>
 </root>

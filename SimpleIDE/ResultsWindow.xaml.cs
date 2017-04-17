@@ -1,25 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using SimpleIDE.Core;
 
-namespace SimpleIDE {
+namespace SimpleIDE
+{
     /// <summary>
-    /// Interaction logic for ResultsWindow.xaml
+    ///     Interaction logic for ResultsWindow.xaml
     /// </summary>
-    public partial class ResultsWindow : Window {
-        public ResultsWindow(string results) {
+    public partial class ResultsWindow
+    {
+        private readonly Compiler _compiler;
+
+        public ResultsWindow(Compiler compiler)
+        {
+            _compiler = compiler;
             InitializeComponent();
-            LogsTextBox.Text = results;
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            _compiler.Compile();
+            var result = new StringBuilder();
+
+            foreach (var keyValuePair in _compiler.Tokens)
+                result.Append(string.Join(", ", keyValuePair.Value)).Append("\n");
+
+            ErrorsList.ItemsSource = _compiler.Errors;
+
+            TokensText.Text = result.ToString();
         }
     }
 }

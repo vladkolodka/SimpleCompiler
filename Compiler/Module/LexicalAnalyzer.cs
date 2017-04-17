@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Compiler.Core;
 using Compiler.Data;
-using Compiler.Resources;
 
 namespace Compiler.Module
 {
@@ -14,8 +12,6 @@ namespace Compiler.Module
             new StateMachine(TokenClass.OperationSign, Constraints.Instance.StateMachines.OperationSigns, true),
             new StateMachine(TokenClass.ReservedWord, Constraints.Instance.StateMachines.ReservedWords)
         };
-
-        public event Action<Token, int> TokenFounded;
 
         public override bool TryBypass(CompilationPool compilationPool)
         {
@@ -50,7 +46,7 @@ namespace Compiler.Module
                 if (_stateMachines.Any(stateMachine => stateMachine.FindToken(compilationPool)))
                 {
                     // token founded
-                    TokenFounded?.Invoke(compilationPool.Tokens.Last(), line);
+                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
                     continue;
                 }
 
@@ -60,14 +56,18 @@ namespace Compiler.Module
                 // try determine literal
                 // if found, continue
 
-                Console.WriteLine(Messages.UnexpectedSymbol, GetNextPartOfLexem(compilationPool), line);
+                Errors.Add(string.Format(Resources.Messages.UnexpectedSymbol, compilationPool.FileName,
+                    GetNextPartOfLexem(compilationPool), line));
                 return false;
             }
             return true;
         }
 
-        private string GetNextPartOfLexem(CompilationPool compilationPool) {
-            var isSymbol = Constraints.Instance.Tokens.OperationSigns.Contains(compilationPool.Code[compilationPool.CodePosition].ToString());
+        private static string GetNextPartOfLexem(CompilationPool compilationPool)
+        {
+            var isSymbol =
+                Constraints.Instance.Tokens.OperationSigns.Contains(
+                    compilationPool.Code[compilationPool.CodePosition].ToString());
 
             var codePositionBackup = compilationPool.CodePosition;
             var count = 1;
@@ -84,5 +84,30 @@ namespace Compiler.Module
             return str;
         }
 
+        private void TokenFounded(Token token, string fileName, int line)
+        {
+            var tokenValue = string.Empty;
+
+            switch (token.Class)
+            {
+                case TokenClass.OperationSign:
+                    tokenValue = Constraints.Instance.Tokens.OperationSigns.ElementAt(token.Id);
+                    break;
+                case TokenClass.ReservedWord:
+                    tokenValue = Constraints.Instance.Tokens.ReservedWords.ElementAt(token.Id);
+                    break;
+                case TokenClass.Identifier:
+                    // TODO
+                    break;
+                case TokenClass.Literal:
+                    // TODO
+                    break;
+                default:
+                    tokenValue = "_UNDEFINED_TYPE_";
+                    break;
+            }
+            Messages.Add(string.Format(Resources.Messages.TokenFounded, fileName, token.Class, token.Id, line,
+                tokenValue));
+        }
     }
 }

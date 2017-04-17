@@ -6,7 +6,7 @@ You will find complete compiler reference below.
 
 #### Format
 
-`<code> | [<parameters>] | <message description>`
+`<file name> | <code> | [<parameters>] | <message description>`
 
 >Parameters separated by a space
 

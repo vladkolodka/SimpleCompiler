@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Compiler.Core;
-using Compiler.Data;
 
 namespace Compiler.Module
 {
     public abstract class CompilerModuleBase : ICompilerModule
     {
-        public ICollection<Error> Errors { get; } = new List<Error>();
+        public ICollection<string> Errors { get; } = new List<string>();
+        public ICollection<string> Messages { get; } = new List<string>();
 
         public abstract bool TryBypass(CompilationPool dataPool);
     }

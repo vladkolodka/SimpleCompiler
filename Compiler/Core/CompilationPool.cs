@@ -5,14 +5,16 @@ namespace Compiler.Core
 {
     public class CompilationPool
     {
-        public CompilationPool(string code)
+        public CompilationPool(string fileName, string code)
         {
+            FileName = fileName;
             Code = code;
         }
 
         public ICollection<Token> Tokens { get; } = new List<Token>();
 
         public string Code { get; set; }
+        public string FileName { get; set; }
         public int CodePosition { get; set; } = 0;
     }
 }

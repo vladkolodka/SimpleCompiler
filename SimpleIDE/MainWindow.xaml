@@ -3,8 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimpleIDE"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid />
+        WindowStartupLocation="CenterScreen"
+        Title="Simple HTCL IDE" Height="350" Width="525">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Compile" Click="CompileButton_OnClick"/>
+        </ToolBar>
+        <TabControl Name="FileTabs">
+            <TabItem Header="File 1">
+                <TextBox/>
+            </TabItem>
+            <TabItem Header="File 2">
+                <TextBox/>
+            </TabItem>
+            <TabItem Header="File 3">
+                <TextBox/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

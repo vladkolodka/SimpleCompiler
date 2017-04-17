@@ -19,7 +19,7 @@ namespace Compiler.Module
 
         public override bool TryBypass(CompilationPool compilationPool)
         {
-            var line = 0;
+            var line = 1;
             while (compilationPool.CodePosition < compilationPool.Code.Length)
             {
                 if (compilationPool.Code[compilationPool.CodePosition] == 32)

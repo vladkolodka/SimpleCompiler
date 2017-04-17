@@ -40,7 +40,7 @@ namespace Compiler.Core
                     tokenValue = Constraints.Instance.Tokens.ReservedWords.ElementAt(token.Id);
                     break;
             }
-            Console.WriteLine(Messages.TokenFounded, token.Class, token.Id, line + 1, tokenValue);
+            Console.WriteLine(Messages.TokenFounded, token.Class, token.Id, line, tokenValue);
         }
 
         public void Run()

@@ -61,8 +61,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File &quot;{0}&quot; not found!
-        ///Process terminated....
+        ///   Looks up a localized string similar to -1 |{0}| File not found..
         /// </summary>
         internal static string FileNotFound {
             get {
@@ -71,7 +70,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You should enter file name!.
+        ///   Looks up a localized string similar to -2 || You must specify the name of the file..
         /// </summary>
         internal static string InvalidFileName {
             get {
@@ -80,7 +79,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token {0}:{1} founded on line {2} (token = &apos;{3}&apos;).
+        ///   Looks up a localized string similar to 1 |{0} {1} {2} {3}| Token found..
         /// </summary>
         internal static string TokenFounded {
             get {
@@ -89,7 +88,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error: unexpected symbol &apos;{0}&apos; on line {1}..
+        ///   Looks up a localized string similar to -3 |{0} {1}| Unexpected symbol..
         /// </summary>
         internal static string UnexpectedSymbol {
             get {

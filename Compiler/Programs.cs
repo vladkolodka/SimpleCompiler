@@ -12,7 +12,7 @@ namespace Compiler
         private static void Main(string[] args)
         {
             Start(args);
-            Console.ReadKey();
+//            Console.ReadKey();
         }
 
         private static void Start(string[] fileNames)

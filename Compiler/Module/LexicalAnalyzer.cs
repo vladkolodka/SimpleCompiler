@@ -18,7 +18,8 @@ namespace Compiler.Module
             var line = 1;
             while (compilationPool.CodePosition < compilationPool.Code.Length)
             {
-                if (compilationPool.Code[compilationPool.CodePosition] == 32)
+                if (compilationPool.Code[compilationPool.CodePosition] == 32 ||
+                    compilationPool.Code[compilationPool.CodePosition] == '\t')
                 {
                     // skip space
                     compilationPool.CodePosition++;
@@ -81,6 +82,12 @@ namespace Compiler.Module
                        compilationPool.FileName,
                        id.Type,
                        id.Identity));
+                if(id.Type == null)
+                {
+                    Errors.Add(string.Format(Resources.Messages.IdentyfierNotDefined, compilationPool.FileName,
+                    id.Identity));
+                    return false;
+                }
             }
             return true;
         }

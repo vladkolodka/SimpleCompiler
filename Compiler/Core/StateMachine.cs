@@ -34,7 +34,7 @@ namespace Compiler.Core
                     if (!state.IsFinal) return false;
 
                     pool.Tokens.Add(new Token(_tokenClass, state.TokenNumber));
-                    if (pool.Tokens.Count > 3)
+                    if (pool.Tokens.Count >= 3 && pool.Idnetifiers.Count != 0)
                     {
                         if (pool.Tokens.ElementAt(pool.Tokens.Count - 2).Class == TokenClass.ReservedWord &&
                             pool.Tokens.ElementAt(pool.Tokens.Count - 2).Id == 2)

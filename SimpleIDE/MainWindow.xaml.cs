@@ -18,7 +18,9 @@ namespace SimpleIDE
             ((TextBox) ((TabItem) FileTabs.Items[0]).Content).Text =
                 @"yes no as equals loop logical symbol number value collection on off sentence blockPr blockListN blockListM text
 & , * / ; : ( ) < > <= >= + - @ # | ?";
+            ((TextBox)((TabItem)FileTabs.Items[1]).Content).Text = File.ReadAllText("code.htcl");
         }
+
 
         private void CompileButton_OnClick(object sender, RoutedEventArgs e)
         {

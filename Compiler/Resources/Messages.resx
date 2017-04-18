@@ -132,4 +132,7 @@
   <data name="IndentifierFounded" xml:space="preserve">
     <value>{0}|2|{1} {2}|Indentifier founded.</value>
   </data>
+  <data name="IdentyfierNotDefined" xml:space="preserve">
+    <value>{0}|-4|{1}|Identifier not defined. </value>
+  </data>
 </root>

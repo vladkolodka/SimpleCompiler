@@ -14,7 +14,7 @@ namespace SimpleIDE.Core
             _fileNames = fileNames;
         }
 
-        public IDictionary<string, string> Identifiers { get; } = new Dictionary<string, string>();
+        public List<KeyValuePair<int, string>> Identifiers { get; } = new List<KeyValuePair<int, string>>();
         public List<Error> Errors { get; } = new List<Error>();
         public Dictionary<int, List<string>> Tokens { get; } = new Dictionary<int, List<string>>();
 
@@ -25,7 +25,7 @@ namespace SimpleIDE.Core
                 StartInfo =
                 {
                     FileName = "compiler.exe",
-                    CreateNoWindow = true,
+                    //CreateNoWindow = true,
                     Arguments = string.Join(" ", _fileNames),
                     RedirectStandardOutput = true,
                     UseShellExecute = false
@@ -61,7 +61,7 @@ namespace SimpleIDE.Core
                         Tokens[lineNumber].Add($"[{parameters[0]}:{parameters[1]} ({parameters[3]})]");
                         break;
                     case 2:
-                        Identifiers.Add(parameters[0], parameters[1]);
+                        Identifiers.Add(new KeyValuePair<int, string>(Convert.ToInt32(parameters[0]), parameters[1]));
                         break;
                 }
             if (code >= 0) return;
@@ -79,6 +79,15 @@ namespace SimpleIDE.Core
                         Message = blocks[3],
                         Code = code,
                         Line = Convert.ToInt32(parameters[1])
+                    });
+                    break;
+                case 4:
+                    Errors.Add(new Error
+                    {
+                        FileName = blocks[0],
+                        Description = $"Identifier type {parameters[0]} is not defined.",
+                        Message = blocks[3],
+                        Code = code,
                     });
                     break;
                 default:

@@ -70,6 +70,15 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на {0}|-4|{1}|Identifier not defined. .
+        /// </summary>
+        internal static string IdentyfierNotDefined {
+            get {
+                return ResourceManager.GetString("IdentyfierNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на {0}|2|{1} {2}|Indentifier founded..
         /// </summary>
         internal static string IndentifierFounded {

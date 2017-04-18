@@ -19,7 +19,8 @@ namespace Compiler.Core
                 count++;
                 pool.CodePosition++;
             }
-            if (pool.Idnetifiers.Contains(new Data.Identifier(pool.Code.Substring(currentPosition, pool.CodePosition - currentPosition))))
+            if (pool.Idnetifiers.Count != 0 &&
+                pool.Idnetifiers.Where(s => s.Type!=null && s.Identity == pool.Code.Substring(currentPosition, pool.CodePosition - currentPosition + 1)).Count() != 0)
             {
                 pool.Tokens.Add(new Data.Token(TokenClass.Identifier, 0, pool.Code.Substring(currentPosition, pool.CodePosition - currentPosition+1)));
                 pool.CodePosition++;

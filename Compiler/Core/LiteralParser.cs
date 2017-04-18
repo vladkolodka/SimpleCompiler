@@ -44,7 +44,8 @@ namespace Compiler.Core
         public static bool IsNumber(CompilationPool pool)
         {
             int tempIndex = pool.CodePosition;
-            if (pool.Code[tempIndex] >= 48 && 57 <= pool.Code[tempIndex])
+            int tp;
+            if (Int32.TryParse(pool.Code[tempIndex].ToString(), out tp))
             {
                 int temp;
                 while (Int32.TryParse(pool.Code[tempIndex].ToString(),out temp))

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <TextBox Name="TokensText" IsReadOnly="True" HorizontalScrollBarVisibility="Auto"
-                 VerticalScrollBarVisibility="Auto" />
+                 VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
         <DataGrid Name="ErrorsList" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
         <DataGrid Name="IdentifiersList" IsReadOnly="True" Grid.Row="0" Grid.Column="1" />
     </Grid>

@@ -60,6 +60,9 @@ namespace SimpleIDE.Core
 
                         Tokens[lineNumber].Add($"[{parameters[0]}:{parameters[1]} ({parameters[3]})]");
                         break;
+                    case 2:
+                        Identifiers.Add(parameters[0], parameters[1]);
+                        break;
                 }
             if (code >= 0) return;
 

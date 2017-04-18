@@ -28,6 +28,7 @@ namespace SimpleIDE
 
             ErrorsList.ItemsSource = _compiler.Errors;
 
+            IdentifiersList.ItemsSource = _compiler.Identifiers;
             TokensText.Text = result.ToString();
         }
     }

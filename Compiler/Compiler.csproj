@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\IndentifierParser.cs" />
+    <Compile Include="Core\LiteralParser.cs" />
     <Compile Include="Core\StateMachine.cs" />
     <Compile Include="Core\Kernel.cs" />
     <Compile Include="Core\CompilationPool.cs" />

@@ -12,7 +12,8 @@ namespace Compiler.Core
         }
 
         public ICollection<Token> Tokens { get; } = new List<Token>();
-
+        public ICollection<string> Literals { get; } = new List<string>();
+        public ICollection<Identifier> Idnetifiers = new List<Identifier>();
         public string Code { get; set; }
         public string FileName { get; set; }
         public int CodePosition { get; set; } = 0;

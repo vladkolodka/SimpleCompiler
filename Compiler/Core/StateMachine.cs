@@ -34,6 +34,14 @@ namespace Compiler.Core
                     if (!state.IsFinal) return false;
 
                     pool.Tokens.Add(new Token(_tokenClass, state.TokenNumber));
+                    if (pool.Tokens.Count > 3)
+                    {
+                        if (pool.Tokens.ElementAt(pool.Tokens.Count - 2).Class == TokenClass.ReservedWord &&
+                            pool.Tokens.ElementAt(pool.Tokens.Count - 2).Id == 2)
+                        {
+                            pool.Idnetifiers.Last().Type = state.TokenNumber;                            
+                        }
+                    }
                     pool.CodePosition++;
                     return true;
                 }

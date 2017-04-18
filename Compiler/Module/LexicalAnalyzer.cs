@@ -50,15 +50,37 @@ namespace Compiler.Module
                     continue;
                 }
 
-                // token not found, trying to find identifier
+                if(LiteralParser.IsLiteral(compilationPool) == true)
+                {                    
+                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
+                    continue;
+                }
+
+                if(IdentifierParser.IsIndentifier(compilationPool) == true)
+                {
+                    var idTemp = compilationPool.Idnetifiers.Last();
+                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
+                    /*Messages.Add(string.Format(Resources.Messages.IndentifierFounded,
+                        compilationPool.FileName,
+                        idTemp.Type, idTemp.Identity));*/
+                    continue;
+                }
+                // try determine literal
                 // if found, continue
 
-                // try determine literal
+                // token not found, trying to find identifier
                 // if found, continue
 
                 Errors.Add(string.Format(Resources.Messages.UnexpectedSymbol, compilationPool.FileName,
                     GetNextPartOfLexem(compilationPool), line));
                 return false;
+            }
+            foreach(Identifier id in compilationPool.Idnetifiers)
+            {
+                Messages.Add(string.Format(Resources.Messages.IndentifierFounded,
+                       compilationPool.FileName,
+                       id.Type,
+                       id.Identity));
             }
             return true;
         }
@@ -97,10 +119,10 @@ namespace Compiler.Module
                     tokenValue = Constraints.Instance.Tokens.ReservedWords.ElementAt(token.Id);
                     break;
                 case TokenClass.Identifier:
-                    // TODO
+                    tokenValue = token.Value;
                     break;
                 case TokenClass.Literal:
-                    // TODO
+                    tokenValue = token.Value;
                     break;
                 default:
                     tokenValue = "_UNDEFINED_TYPE_";

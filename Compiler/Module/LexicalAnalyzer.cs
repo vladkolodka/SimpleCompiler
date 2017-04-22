@@ -18,81 +18,51 @@ namespace Compiler.Module
             var line = 1;
             while (compilationPool.CodePosition < compilationPool.Code.Length)
             {
-                if (compilationPool.Code[compilationPool.CodePosition] == 32 ||
-                    compilationPool.Code[compilationPool.CodePosition] == '\t')
+                if (Constraints.Instance.Tokens.Delmers.Contains(compilationPool.Code[compilationPool.CodePosition]))
                 {
-                    // skip space
+                    if (compilationPool.Code[compilationPool.CodePosition] == '\n') line++;
                     compilationPool.CodePosition++;
-                    continue;
-                }
-
-                if (compilationPool.Code[compilationPool.CodePosition] == '\n')
-                {
-                    // linux-style new line
-                    compilationPool.CodePosition++;
-                    line++;
-                    continue;
-                }
-
-                if (compilationPool.CodePosition + 1 < compilationPool.Code.Length &&
-                    compilationPool.Code[compilationPool.CodePosition] == '\r' &&
-                    compilationPool.Code[compilationPool.CodePosition + 1] == '\n')
-                {
-                    // windows-style new line
-                    compilationPool.CodePosition += 2;
-                    line++;
                     continue;
                 }
 
                 if (_stateMachines.Any(stateMachine => stateMachine.FindToken(compilationPool)))
                 {
-                    // token founded
                     TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
                     continue;
                 }
 
-                if(LiteralParser.IsLiteral(compilationPool) == true)
-                {                    
-                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
-                    continue;
-                }
-
-                if(IdentifierParser.IsIndentifier(compilationPool) == true)
+                if (LiteralParser.IsLiteral(compilationPool))
                 {
-                    var idTemp = compilationPool.Idnetifiers.Last();
                     TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
-                    /*Messages.Add(string.Format(Resources.Messages.IndentifierFounded,
-                        compilationPool.FileName,
-                        idTemp.Type, idTemp.Identity));*/
                     continue;
                 }
-                // try determine literal
-                // if found, continue
 
-                // token not found, trying to find identifier
-                // if found, continue
+                if (IdentifierParser.IsIndentifier(compilationPool))
+                {
+                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
+                    continue;
+                }
+
 
                 Errors.Add(string.Format(Resources.Messages.UnexpectedSymbol, compilationPool.FileName,
                     GetNextPartOfLexem(compilationPool), line));
                 return false;
             }
-            foreach(Identifier id in compilationPool.Idnetifiers)
+            foreach (var id in compilationPool.Idnetifiers)
             {
                 Messages.Add(string.Format(Resources.Messages.IndentifierFounded,
-                       compilationPool.FileName,
-                       id.Type,
-                       id.Identity));
-                if(id.Type == null)
-                {
-                    Errors.Add(string.Format(Resources.Messages.IdentyfierNotDefined, compilationPool.FileName,
+                    compilationPool.FileName,
+                    id.Type,
                     id.Identity));
-                    return false;
-                }
+                if (id.Type != null) continue;
+
+                Errors.Add(string.Format(Resources.Messages.IdentyfierNotDefined, compilationPool.FileName, id.Identity));
+                return false;
             }
             return true;
         }
 
-        private static string GetNextPartOfLexem(CompilationPool compilationPool)
+        public static string GetNextPartOfLexem(CompilationPool compilationPool)
         {
             var isSymbol =
                 Constraints.Instance.Tokens.OperationSigns.Contains(
@@ -115,7 +85,7 @@ namespace Compiler.Module
 
         private void TokenFounded(Token token, string fileName, int line)
         {
-            var tokenValue = string.Empty;
+            string tokenValue;
 
             switch (token.Class)
             {

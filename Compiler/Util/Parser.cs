@@ -30,5 +30,15 @@ namespace Compiler.Util
         {
             return text.Replace("\r", "").Split('\n');
         }
+
+        public static ICollection<Identifier> ParseIdentifiers(string text)
+        {
+            return
+                text.Replace("\r", "")
+                    .Split('\n')
+                    .Select(line => line.Split(':'))
+                    .Select(blocks => new Identifier(blocks[0], Convert.ToInt32(blocks[1])))
+                    .ToList();
+        }
     }
 }

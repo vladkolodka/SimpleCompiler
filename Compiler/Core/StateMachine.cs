@@ -34,14 +34,11 @@ namespace Compiler.Core
                     if (!state.IsFinal) return false;
 
                     pool.Tokens.Add(new Token(_tokenClass, state.TokenNumber));
+
                     if (pool.Tokens.Count >= 3 && pool.Idnetifiers.Count != 0)
-                    {
                         if (pool.Tokens.ElementAt(pool.Tokens.Count - 2).Class == TokenClass.ReservedWord &&
                             pool.Tokens.ElementAt(pool.Tokens.Count - 2).Id == 2)
-                        {
-                            pool.Idnetifiers.Last().Type = state.TokenNumber;                            
-                        }
-                    }
+                            pool.Idnetifiers.Last().Type = state.TokenNumber;
                     pool.CodePosition++;
                     return true;
                 }
@@ -66,10 +63,8 @@ namespace Compiler.Core
         {
             if (pool.CodePosition + 1 == pool.Code.Length) return false;
 
-            var next = pool.Code[pool.CodePosition + 1];
-            if (next == 32 || next == '\r' || next == '\n') return false;
 
-//            if (pool.Code[pool.CodePosition + 1] == 32) return false;
+            if (Constraints.Instance.Tokens.Delmers.Contains(pool.Code[pool.CodePosition + 1])) return false;
 
             // is current symbol belongs to token-class alphabet
             return searchSymbol

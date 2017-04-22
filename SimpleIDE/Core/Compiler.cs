@@ -25,7 +25,7 @@ namespace SimpleIDE.Core
                 StartInfo =
                 {
                     FileName = "compiler.exe",
-                    //CreateNoWindow = true,
+                    CreateNoWindow = true,
                     Arguments = string.Join(" ", _fileNames),
                     RedirectStandardOutput = true,
                     UseShellExecute = false
@@ -87,7 +87,7 @@ namespace SimpleIDE.Core
                         FileName = blocks[0],
                         Description = $"Identifier type {parameters[0]} is not defined.",
                         Message = blocks[3],
-                        Code = code,
+                        Code = code
                     });
                     break;
                 default:

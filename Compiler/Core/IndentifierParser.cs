@@ -1,38 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using Compiler.Data;
+using Compiler.Module;
 
 namespace Compiler.Core
 {
     public static class IdentifierParser
     {
-        
         public static bool IsIndentifier(CompilationPool pool)
         {
-            var currentPosition = pool.CodePosition;
-            var count = 1;
+            var identifierName = LexicalAnalyzer.GetNextPartOfLexem(pool);
+            pool.CodePosition += identifierName.Length;
 
-            while (StateMachine.HasNextSymbol(pool, false))
+            if (pool.Idnetifiers.Any(s => s.Type != null && s.Identity == identifierName) ||
+                Constraints.Instance.Identifiers.Core.Any(identifier => identifier.Identity.Equals(identifierName)))
             {
-                count++;
-                pool.CodePosition++;
-            }
-            if (pool.Idnetifiers.Count != 0 &&
-                pool.Idnetifiers.Where(s => s.Type!=null && s.Identity == pool.Code.Substring(currentPosition, pool.CodePosition - currentPosition + 1)).Count() != 0)
-            {
-                pool.Tokens.Add(new Data.Token(TokenClass.Identifier, 0, pool.Code.Substring(currentPosition, pool.CodePosition - currentPosition+1)));
-                pool.CodePosition++;
+                pool.Tokens.Add(new Token(TokenClass.Identifier, -1, identifierName));
                 return true;
             }
-            else
-            {
-                pool.Idnetifiers.Add(new Data.Identifier(pool.Code.Substring(currentPosition, pool.CodePosition - currentPosition+1)));
-                pool.Tokens.Add(new Data.Token(TokenClass.Identifier, 0, pool.Code.Substring(currentPosition, pool.CodePosition - currentPosition + 1)));
-                pool.CodePosition++;
-                return true;
-            }
+
+            pool.Idnetifiers.Add(new Identifier(identifierName));
+            pool.Tokens.Add(new Token(TokenClass.Identifier, -1, identifierName));
+
+            return true;
         }
     }
 }

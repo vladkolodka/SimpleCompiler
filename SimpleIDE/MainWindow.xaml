@@ -11,6 +11,14 @@
             <Button Content="Compile" Click="CompileButton_OnClick" />
         </ToolBar>
         <TabControl Name="FileTabs">
+            <TabControl.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="TextBox">
+                        <Setter Property="AcceptsTab" Value="True" />
+                        <Setter Property="AcceptsReturn" Value="True" />
+                    </Style>
+                </ResourceDictionary>
+            </TabControl.Resources>
             <TabItem Header="File 1">
                 <TextBox />
             </TabItem>

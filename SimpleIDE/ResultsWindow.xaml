@@ -16,8 +16,11 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <TextBox Name="TokensText" IsReadOnly="True" HorizontalScrollBarVisibility="Auto"
-                 VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+                 VerticalScrollBarVisibility="Auto" AcceptsTab="True" />
         <DataGrid Name="ErrorsList" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
-        <DataGrid Name="IdentifiersList" IsReadOnly="True" Grid.Row="0" Grid.Column="1" />
+        <DockPanel Grid.Row="0" Grid.Column="1">
+            <Label DockPanel.Dock="Top" Content="User-defined identifiers" />
+            <DataGrid Name="IdentifiersList" IsReadOnly="True" />
+        </DockPanel>
     </Grid>
 </Window>

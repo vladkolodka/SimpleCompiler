@@ -32,7 +32,6 @@ namespace Compiler.Core
                     continue;
                 }
 
-                // TODO errors handling
                 Console.Write(string.Join("\n", module.Errors));
 
                 // terminate compilation process if there are errors

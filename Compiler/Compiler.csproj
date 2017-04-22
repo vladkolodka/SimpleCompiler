@@ -47,7 +47,6 @@
     <Compile Include="Core\StateMachine.cs" />
     <Compile Include="Core\Kernel.cs" />
     <Compile Include="Core\CompilationPool.cs" />
-    <Compile Include="Core\Types.cs" />
     <Compile Include="Data\Constraints.cs" />
     <Compile Include="Data\Identifier.cs" />
     <Compile Include="Data\State.cs" />
@@ -60,6 +59,11 @@
     <Compile Include="Module\SyntaxAnalyzer.cs" />
     <Compile Include="Programs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Identifiers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Identifiers.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,6 +85,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Identifiers.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Identifiers.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
@@ -96,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" />
+    <Content Include="Resources\Identifiers\CoreLib.txt" />
     <None Include="Resources\Tokens\OperationSigns.txt" />
   </ItemGroup>
   <ItemGroup>

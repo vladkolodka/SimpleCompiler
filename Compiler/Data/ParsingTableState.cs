@@ -13,5 +13,6 @@ namespace Compiler.Data
         public int? PushToStack { get; set; }
         public bool IsPopFromStackRequired { get; set; }
         public bool IsErrorOccured { get; set; }
+        public bool IsNullable { get; set; }
     }
 }

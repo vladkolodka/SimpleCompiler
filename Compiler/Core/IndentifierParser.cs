@@ -11,14 +11,14 @@ namespace Compiler.Core
             var identifierName = LexicalAnalyzer.GetNextPartOfLexem(pool);
             pool.CodePosition += identifierName.Length;
 
-            if (pool.Idnetifiers.Any(s => s.Type != null && s.Identity == identifierName) ||
+            if (pool.Identifiers.Any(s => s.Type != null && s.Identity == identifierName) ||
                 Constraints.Instance.Identifiers.Core.Any(identifier => identifier.Identity.Equals(identifierName)))
             {
                 pool.Tokens.Add(new Token(TokenClass.Identifier, -1, identifierName));
                 return true;
             }
 
-            pool.Idnetifiers.Add(new Identifier(identifierName));
+            pool.Identifiers.Add(new Identifier(identifierName));
             pool.Tokens.Add(new Token(TokenClass.Identifier, -1, identifierName));
 
             return true;

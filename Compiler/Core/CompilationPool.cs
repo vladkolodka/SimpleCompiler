@@ -5,7 +5,7 @@ namespace Compiler.Core
 {
     public class CompilationPool
     {
-        public ICollection<Identifier> Idnetifiers = new List<Identifier>();
+        public List<Identifier> Identifiers { get; } = new List<Identifier>();
 
         public CompilationPool(string fileName, string code)
         {

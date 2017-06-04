@@ -55,7 +55,8 @@ namespace Compiler.Util
                     IsAcceptRequired = items[4].Equals("+"),
                     PushToStack = items[5].Equals("-") ? null : new int?(int.Parse(items[5])),
                     IsPopFromStackRequired = items[6].Equals("+"),
-                    IsErrorOccured = items[7].Equals("+")
+                    IsErrorOccured = items[7].Equals("+"),
+                    IsNullable = items.Length >= 9 && items[8].Equals("!")
                 })
                 .ToList();
         }

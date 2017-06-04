@@ -26,7 +26,7 @@ namespace Compiler.Data
         {
             public ICollection<string> OperationSigns { get; } = Parser.ParseTokens(Resources.Tokens.OperationSigns);
             public ICollection<string> ReservedWords { get; } = Parser.ParseTokens(Resources.Tokens.ReservedWords);
-            public ICollection<char> Delmers { get; } = new List<char> {' ', ',', ':', '#', '\r', '\n'};
+            public ICollection<char> Delmers { get; } = new List<char> {' ', ',', ':', /*'#',*/ '\r', '\n'};
         }
 
         public class IdentifierConstraints

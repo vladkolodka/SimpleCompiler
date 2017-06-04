@@ -48,17 +48,25 @@ namespace Compiler.Modules
                     GetNextPartOfLexem(compilationPool), line));
                 return false;
             }
-            foreach (var id in compilationPool.Idnetifiers)
+
+            compilationPool.Identifiers.ForEach(identifier =>
+            {
+                if(!identifier.Type.HasValue) identifier.Type = 1;
+            });
+
+            var identifiers = compilationPool.Identifiers.Where(identifier => char.IsLetter(identifier.Identity[0])).ToList();
+
+            compilationPool.Identifiers.Clear();
+            compilationPool.Identifiers.AddRange(identifiers);
+
+            compilationPool.Identifiers.ForEach(identifier =>
             {
                 Messages.Add(string.Format(Resources.Messages.IndentifierFounded,
                     compilationPool.FileName,
-                    id.Type,
-                    id.Identity));
-                if (id.Type != null) continue;
+                    identifier.Type,
+                    identifier.Identity));
+            });
 
-//                Errors.Add(string.Format(Resources.Messages.IdentyfierNotDefined, compilationPool.FileName, id.Identity));
-//                return false;
-            }
             return true;
         }
 

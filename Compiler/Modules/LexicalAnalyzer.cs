@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Compiler.Core;
 using Compiler.Data;
@@ -9,8 +10,9 @@ namespace Compiler.Modules
     {
         private readonly List<StateMachine> _stateMachines = new List<StateMachine>
         {
-            new StateMachine(TokenClass.OperationSign, Constraints.Instance.StateMachines.OperationSigns, true),
-            new StateMachine(TokenClass.ReservedWord, Constraints.Instance.StateMachines.ReservedWords)
+            new StateMachine(TokenClass.OperationSign, Constraints.Instance.StateMachines.OperationSigns),
+            new StateMachine(TokenClass.ReservedWord, Constraints.Instance.StateMachines.ReservedWords),
+            new StateMachine(TokenClass.Delmer, Constraints.Instance.StateMachines.Delmers)
         };
 
         public override bool TryBypass(CompilationPool compilationPool)
@@ -18,7 +20,7 @@ namespace Compiler.Modules
             var line = 1;
             while (compilationPool.CodePosition < compilationPool.Code.Length)
             {
-                if (Constraints.Instance.Tokens.Delmers.Contains(compilationPool.Code[compilationPool.CodePosition]))
+                if (Constraints.Instance.Tokens.SkippedSymbols.Contains(compilationPool.Code[compilationPool.CodePosition]))
                 {
                     if (compilationPool.Code[compilationPool.CodePosition] == '\n') line++;
                     compilationPool.CodePosition++;
@@ -27,19 +29,19 @@ namespace Compiler.Modules
 
                 if (_stateMachines.Any(stateMachine => stateMachine.FindToken(compilationPool)))
                 {
-                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
+                    OnTokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
                     continue;
                 }
 
                 if (LiteralParser.IsLiteral(compilationPool))
                 {
-                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
+                    OnTokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
                     continue;
                 }
 
                 if (IdentifierParser.IsIndentifier(compilationPool))
                 {
-                    TokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
+                    OnTokenFounded(compilationPool.Tokens.Last(), compilationPool.FileName, line);
                     continue;
                 }
 
@@ -72,14 +74,19 @@ namespace Compiler.Modules
 
         public static string GetNextPartOfLexem(CompilationPool compilationPool)
         {
-            var isSymbol =
+            /*var isSymbol =
                 Constraints.Instance.Tokens.OperationSigns.Contains(
-                    compilationPool.Code[compilationPool.CodePosition].ToString());
+                    compilationPool.Code[compilationPool.CodePosition].ToString());*/
+
+            var tokenClass =
+                StateMachine.DetermineTokenClass(compilationPool.Code[compilationPool.CodePosition].ToString());
+
+            if(!tokenClass.HasValue) throw new Exception("Token class not determined.");
 
             var codePositionBackup = compilationPool.CodePosition;
             var count = 1;
 
-            while (StateMachine.HasNextSymbol(compilationPool, isSymbol))
+            while (StateMachine.HasNextSymbol(compilationPool, tokenClass.Value))
             {
                 count++;
                 compilationPool.CodePosition++;
@@ -91,7 +98,7 @@ namespace Compiler.Modules
             return str;
         }
 
-        private void TokenFounded(Token token, string fileName, int line)
+        private void OnTokenFounded(Token token, string fileName, int line)
         {
             string tokenValue;
 
@@ -108,6 +115,9 @@ namespace Compiler.Modules
                     break;
                 case TokenClass.Literal:
                     tokenValue = token.Value;
+                    break;
+                case TokenClass.Delmer:
+                    tokenValue = Constraints.Instance.Tokens.Delmers.ElementAt(token.Id);
                     break;
                 default:
                     tokenValue = "_UNDEFINED_TYPE_";

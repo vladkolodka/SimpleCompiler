@@ -16,6 +16,8 @@ namespace Compiler.Util
             {
                 var blocks = line.Split(' ');
 
+                if(blocks[0].Equals("--")) continue;
+
                 // transition declaration
                 if (blocks[0].Equals(string.Empty))
                     stateCollection.Last().Transitions.Add(blocks[1][0], Convert.ToInt32(blocks[2]));

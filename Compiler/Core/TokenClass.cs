@@ -5,6 +5,7 @@
         ReservedWord,
         OperationSign,
         Identifier,
-        Literal
+        Literal,
+        Delmer
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using Compiler.Core;
+using Compiler.Data;
 using Compiler.Resources;
 using Compiler.Util;
 
@@ -12,7 +13,15 @@ namespace Compiler
     {
         private static void Main(string[] args)
         {
-            Start(args);
+            try
+            {
+                Start(args);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
             Console.ReadKey();
         }
 

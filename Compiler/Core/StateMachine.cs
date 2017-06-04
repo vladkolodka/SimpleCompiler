@@ -6,16 +6,13 @@ namespace Compiler.Core
 {
     public class StateMachine
     {
-        private readonly bool _searchSymbol;
         private readonly ICollection<State> _states;
         private readonly TokenClass _tokenClass;
 
-        public StateMachine(TokenClass tokenClass, ICollection<State> states,
-            bool searchSymbol = false)
+        public StateMachine(TokenClass tokenClass, ICollection<State> states)
         {
             _tokenClass = tokenClass;
             _states = states;
-            _searchSymbol = searchSymbol;
         }
 
         private bool TryFindToken(CompilationPool pool)
@@ -25,7 +22,7 @@ namespace Compiler.Core
                 var state = _states.ElementAt(stateNumber);
                 var symbol = pool.Code[pool.CodePosition];
 
-                if (!HasNextSymbol(pool, _searchSymbol))
+                if (!HasNextSymbol(pool, _tokenClass))
                 {
                     if (state.Transitions.ContainsKey(symbol)) state = _states.ElementAt(state.Transitions[symbol]);
                     else return false;
@@ -59,17 +56,38 @@ namespace Compiler.Core
             return false;
         }
 
-        public static bool HasNextSymbol(CompilationPool pool, bool searchSymbol)
+        public static bool HasNextSymbol(CompilationPool pool, TokenClass tokenClass)
         {
             if (pool.CodePosition + 1 == pool.Code.Length) return false;
 
+            var symbol = pool.Code[pool.CodePosition + 1].ToString();
 
-            if (Constraints.Instance.Tokens.Delmers.Contains(pool.Code[pool.CodePosition + 1])) return false;
+            if (Constraints.Instance.Tokens.SkippedSymbols.Contains(symbol[0])) return false;
+
+            if (Constraints.Instance.Borders.ForSpecialChars.Contains(symbol)) return false;
+
+            var result = !Constraints.Instance.Borders.ForTokenClasses
+                .Where(tokenBorders => tokenBorders.Key != tokenClass)
+                .Any(tokenBorders => tokenBorders.Value.Contains(symbol));
+
+            return result;
+
+            /*if (Constraints.Instance.Tokens.SkippedSymbols.Contains(pool.Code[pool.CodePosition + 1])) return false;
 
             // is current symbol belongs to token-class alphabet
             return searchSymbol
                 ? Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString())
-                : !Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString());
+                : !Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString());*/
+        }
+
+        public static TokenClass? DetermineTokenClass(string symbol)
+        {
+            foreach (var tokenBorders in Constraints.Instance.Borders.ForTokenClasses)
+            {
+                if (tokenBorders.Value.Contains(symbol)) return tokenBorders.Key;
+            }
+
+            return null;
         }
     }
 }

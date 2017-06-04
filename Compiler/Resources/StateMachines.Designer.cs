@@ -62,12 +62,33 @@ namespace Compiler.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to 0
+        /// , 1
+        /// : 2
+        /// ( 3
+        /// ) 4
+        /// @&lt; 5
+        /// @&gt; 6
+        /// # 7
+        ///1 ! 1
+        ///2 ! 2
+        ///3 ! 3
+        ///4 ! 4
+        ///5 ! 5
+        ///6 ! 6
+        ///7 ! 7.
+        /// </summary>
+        internal static string Delmers {
+            get {
+                return ResourceManager.GetString("Delmers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0
         /// &amp; 1
-        /// , 2
         /// * 3
         /// / 4
         /// ; 5
-        /// : 6
         /// ( 7
         /// ) 8
         /// = 9
@@ -120,7 +141,96 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 0
+        /// y 1
+        /// n 2
+        /// a 3
+        /// e 4
+        /// l 5
+        /// s 6
+        /// o 7
+        /// b 8
+        /// t 9
+        /// v 62
+        /// c 67
+        ///1
+        /// e 10
+        ///2
+        /// o 11
+        /// u 12
+        ///3
+        /// s 13
+        ///4
+        /// q 14
+        ///5
+        /// o 15
+        ///6
+        /// y 16
+        /// e 17
+        ///7
+        /// n 18
+        /// f 19
+        ///8
+        /// l 20
+        ///9
+        /// e 21
+        ///10
+        /// s 22
+        ///11 ! 2
+        ///12
+        /// m 23
+        ///13 ! 3
+        ///14
+        /// u 24
+        ///15
+        /// o 25
+        /// g 26
+        ///16
+        /// m 27
+        ///17
+        /// n 28
+        ///18 ! 11
+        ///19
+        /// f 29
+        ///20
+        /// o 30
+        ///21
+        /// x 31
+        ///22 ! 1
+        ///23
+        /// b 32
+        ///24
+        /// a 33
+        ///25
+        /// p 34
+        ///26
+        /// i 35
+        ///27
+        /// b 36
+        ///28
+        /// t 37
+        ///29 ! 12
+        ///30
+        /// c 38
+        ///31
+        /// t 39
+        ///32
+        /// e 40
+        ///33
+        /// l 41
+        ///34 ! 5
+        ///35
+        /// c 42
+        ///36
+        /// o 43
+        ///37
+        /// e 44
+        ///38
+        /// k 45
+        ///39 ! 17
+        ///40
+        /// r 46
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ReservedWords {
             get {

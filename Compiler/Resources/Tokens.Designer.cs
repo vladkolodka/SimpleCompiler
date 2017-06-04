@@ -61,6 +61,21 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ,
+        ///:
+        ///(
+        ///)
+        ///@&lt;
+        ///@&gt;
+        ///#.
+        /// </summary>
+        internal static string Delmers {
+            get {
+                return ResourceManager.GetString("Delmers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;
         ///,
         ///*
@@ -94,7 +109,23 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to yes
+        ///no
+        ///as
+        ///equals
+        ///loop
+        ///logical
+        ///symbol
+        ///number
+        ///value
+        ///collection
+        ///on
+        ///off
+        ///sentence
+        ///blockPr
+        ///blockListN
+        ///blockListM
+        ///text.
         /// </summary>
         internal static string ReservedWords {
             get {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Compiler.Module;
+using Compiler.Modules;
 
 namespace Compiler.Core
 {
@@ -17,8 +17,8 @@ namespace Compiler.Core
 
             // create compiler modules chain
             _modules.Add(new LexicalAnalyzer());
-//            _modules.Add(new SyntaxAnalyzer());
-//            _modules.Add(new SemanticAnalyzer());
+            _modules.Add(new SyntaxAnalyzer());
+//            _modules.Add(new CodeGenerator());
         }
 
         public void Run()
@@ -26,11 +26,19 @@ namespace Compiler.Core
             foreach (var pool in _compilationPools)
             foreach (var module in _modules)
             {
-                if (module.TryBypass(pool))
+                try
                 {
-                    Console.Write(string.Join("\n", module.Messages));
-                    continue;
+                    if (module.TryBypass(pool))
+                    {
+                        Console.Write(string.Join("\n", module.Messages));
+                        continue;
+                    }
                 }
+                catch (NotImplementedException e)
+                {
+                    Console.WriteLine($"Module {e.Message} is not implemented!");
+                }
+
 
                 Console.Write(string.Join("\n", module.Errors));
 

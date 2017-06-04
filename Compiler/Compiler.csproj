@@ -49,14 +49,15 @@
     <Compile Include="Core\CompilationPool.cs" />
     <Compile Include="Data\Constraints.cs" />
     <Compile Include="Data\Identifier.cs" />
+    <Compile Include="Data\ParsingTableState.cs" />
     <Compile Include="Data\State.cs" />
     <Compile Include="Data\Token.cs" />
     <Compile Include="Core\TokenClass.cs" />
-    <Compile Include="Module\CompilerModuleBase.cs" />
+    <Compile Include="Modules\CompilerModuleBase.cs" />
     <Compile Include="Core\ICompilerModule.cs" />
-    <Compile Include="Module\LexicalAnalyzer.cs" />
-    <Compile Include="Module\SemanticAnalyzer.cs" />
-    <Compile Include="Module\SyntaxAnalyzer.cs" />
+    <Compile Include="Modules\LexicalAnalyzer.cs" />
+    <Compile Include="Modules\CodeGenerator.cs" />
+    <Compile Include="Modules\SyntaxAnalyzer.cs" />
     <Compile Include="Programs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Identifiers.Designer.cs">
@@ -68,6 +69,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ParsingTables.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ParsingTables.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\StateMachines.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -93,6 +99,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ParsingTables.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ParsingTables.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\StateMachines.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StateMachines.Designer.cs</LastGenOutput>
@@ -103,6 +114,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\ParsingTables\MainParsnigTable.txt" />
     <None Include="readme.md" />
     <Content Include="Resources\Identifiers\CoreLib.txt" />
     <None Include="Resources\Tokens\OperationSigns.txt" />

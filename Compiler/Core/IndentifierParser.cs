@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Compiler.Data;
-using Compiler.Module;
+using Compiler.Modules;
 
 namespace Compiler.Core
 {

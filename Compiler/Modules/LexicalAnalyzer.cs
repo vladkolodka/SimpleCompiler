@@ -3,7 +3,7 @@ using System.Linq;
 using Compiler.Core;
 using Compiler.Data;
 
-namespace Compiler.Module
+namespace Compiler.Modules
 {
     public class LexicalAnalyzer : CompilerModuleBase
     {
@@ -56,8 +56,8 @@ namespace Compiler.Module
                     id.Identity));
                 if (id.Type != null) continue;
 
-                Errors.Add(string.Format(Resources.Messages.IdentyfierNotDefined, compilationPool.FileName, id.Identity));
-                return false;
+//                Errors.Add(string.Format(Resources.Messages.IdentyfierNotDefined, compilationPool.FileName, id.Identity));
+//                return false;
             }
             return true;
         }

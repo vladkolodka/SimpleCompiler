@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Compiler.Core;
 using Compiler.Resources;
+using Compiler.Util;
 
 namespace Compiler
 {
@@ -12,6 +13,7 @@ namespace Compiler
         private static void Main(string[] args)
         {
             Start(args);
+            Console.ReadKey();
         }
 
         private static void Start(IReadOnlyCollection<string> fileNames)

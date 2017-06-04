@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Compiler.Core;
 
-namespace Compiler.Module
+namespace Compiler.Modules
 {
     public abstract class CompilerModuleBase : ICompilerModule
     {

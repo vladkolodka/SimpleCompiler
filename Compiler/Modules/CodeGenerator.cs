@@ -1,9 +1,9 @@
 ﻿using System;
 using Compiler.Core;
 
-namespace Compiler.Module
+namespace Compiler.Modules
 {
-    internal class SemanticAnalyzer : CompilerModuleBase
+    internal class CodeGenerator : CompilerModuleBase
     {
         public override bool TryBypass(CompilationPool dataPool)
         {

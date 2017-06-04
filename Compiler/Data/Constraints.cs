@@ -8,7 +8,7 @@ namespace Compiler.Data
         private static Constraints _instance;
         public StateMachineConstraint StateMachines { get; } = new StateMachineConstraint();
         public TokenConstraint Tokens { get; } = new TokenConstraint();
-        public IdentifierConstraint Identifiers { get; } = new IdentifierConstraint();
+        public IdentifierConstraints Identifiers { get; } = new IdentifierConstraints();
 
 
         public static Constraints Instance => _instance ?? (_instance = new Constraints());
@@ -29,7 +29,7 @@ namespace Compiler.Data
             public ICollection<char> Delmers { get; } = new List<char> {' ', ',', ':', '#', '\r', '\n'};
         }
 
-        public class IdentifierConstraint
+        public class IdentifierConstraints
         {
             public ICollection<Identifier> Core { get; } = Parser.ParseIdentifiers(Resources.Identifiers.CoreLib);
         }

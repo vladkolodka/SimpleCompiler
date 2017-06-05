@@ -5,6 +5,9 @@ namespace Compiler.Core
 {
     public static class IdentifierParser
     {
+        // TODO scopes
+        private const int Scope = 0;
+
         public static bool IsIndentifier(CompilationPool pool)
         {
             var identifierName = GetIdentifierName(pool);
@@ -12,15 +15,16 @@ namespace Compiler.Core
 
             pool.CodePosition += identifierName.Length;
 
-            if (pool.Identifiers.Any(s => s.Type != null && s.Identity == identifierName) ||
-                Constraints.Instance.Identifiers.Core.Any(identifier => identifier.Identity.Equals(identifierName)))
-            {
-                pool.Tokens.Add(new Token(TokenClass.Identifier, -1, identifierName));
-                return true;
-            }
+            var existingIdenfitier =
+                pool.Identifiers.FirstOrDefault(
+                    identifier => identifier.Identity.Equals(identifierName) && identifier.ScopeLevel.Equals(Scope));
 
-            pool.Identifiers.Add(new Identifier(identifierName));
-            pool.Tokens.Add(new Token(TokenClass.Identifier, -1, identifierName));
+            if (existingIdenfitier == null) pool.Identifiers.Add(new Identifier(identifierName));
+
+            pool.Tokens.Add(new Token(TokenClass.Identifier,
+                existingIdenfitier == null
+                    ? pool.Identifiers.Count - 1
+                    : pool.Identifiers.IndexOf(existingIdenfitier), identifierName));
 
             return true;
         }

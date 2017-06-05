@@ -10,9 +10,9 @@ namespace Compiler.Modules
     {
         private readonly List<StateMachine> _stateMachines = new List<StateMachine>
         {
+            new StateMachine(TokenClass.Delmer, Constraints.Instance.StateMachines.Delmers),
             new StateMachine(TokenClass.OperationSign, Constraints.Instance.StateMachines.OperationSigns),
-            new StateMachine(TokenClass.ReservedWord, Constraints.Instance.StateMachines.ReservedWords),
-            new StateMachine(TokenClass.Delmer, Constraints.Instance.StateMachines.Delmers)
+            new StateMachine(TokenClass.ReservedWord, Constraints.Instance.StateMachines.ReservedWords)
         };
 
         public override bool TryBypass(CompilationPool compilationPool)
@@ -52,16 +52,7 @@ namespace Compiler.Modules
                 return false;
             }
 
-            compilationPool.Identifiers.ForEach(identifier =>
-            {
-                if (!identifier.Type.HasValue) identifier.Type = 1;
-            });
-
-            var identifiers = compilationPool.Identifiers.Where(identifier => char.IsLetter(identifier.Identity[0]))
-                .ToList();
-
-            compilationPool.Identifiers.Clear();
-            compilationPool.Identifiers.AddRange(identifiers);
+            DetermineIdentifierTypes(compilationPool);
 
             compilationPool.Identifiers.ForEach(identifier =>
             {
@@ -72,6 +63,37 @@ namespace Compiler.Modules
             });
 
             return true;
+        }
+
+        private void DetermineIdentifierTypes(CompilationPool compilationPool)
+        {
+            var rules = Constraints.Instance.Identifiers.CoreRules;
+
+            var idenfitierTokens = compilationPool.Tokens
+                .Where(token => token.Class == TokenClass.Identifier && compilationPool.Identifiers[token.Id].Type == 0)
+                .GroupBy(token => token.Id)
+                .Select(tokens => tokens.First())
+                .Select(token => new {Index = compilationPool.Tokens.IndexOf(token), Token = token}).ToList();
+
+            idenfitierTokens.ForEach(data =>
+            {
+                foreach (var identifierRule in rules)
+                {
+                    var isValid = true;
+                    foreach (var rule in identifierRule.Rules)
+                    {
+                        var index = data.Index + rule.Item1;
+                        if (index < 0 || index >= compilationPool.Tokens.Count) continue;
+
+                        var token = compilationPool.Tokens[index];
+                        if (token.Class != rule.Item2 || token.Id != rule.Item3) isValid = false;
+                    }
+                    if (!isValid) continue;
+
+                    compilationPool.Identifiers[data.Token.Id].Type = identifierRule.IdentifierType;
+                    break;
+                }
+            });
         }
 
         public static string GetNextPartOfLexem(CompilationPool compilationPool)

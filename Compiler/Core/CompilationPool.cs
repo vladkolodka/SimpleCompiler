@@ -5,16 +5,18 @@ namespace Compiler.Core
 {
     public class CompilationPool
     {
-        public List<Identifier> Identifiers { get; } = new List<Identifier>();
-
         public CompilationPool(string fileName, string code)
         {
             FileName = fileName;
             Code = code;
+
+            Identifiers.AddRange(Constraints.Instance.Identifiers.CoreList);
         }
 
-        public ICollection<Token> Tokens { get; } = new List<Token>();
-        public ICollection<string> Literals { get; } = new List<string>();
+        public List<Identifier> Identifiers { get; } = new List<Identifier>();
+
+        public List<Token> Tokens { get; } = new List<Token>();
+        public List<string> Literals { get; } = new List<string>();
         public string Code { get; set; }
         public string FileName { get; set; }
         public int CodePosition { get; set; } = 0;

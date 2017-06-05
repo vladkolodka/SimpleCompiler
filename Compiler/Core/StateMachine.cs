@@ -27,20 +27,17 @@ namespace Compiler.Core
                     if (state.Transitions.ContainsKey(symbol)) state = _states.ElementAt(state.Transitions[symbol]);
                     else return false;
 
-                    // last chanse to determine token
+                    // last chanсe to determine token
                     if (!state.IsFinal) return false;
 
                     pool.Tokens.Add(new Token(_tokenClass, state.TokenNumber));
 
-                    if (pool.Tokens.Count >= 3 && pool.Identifiers.Count != 0)
-                        if (pool.Tokens.ElementAt(pool.Tokens.Count - 2).Class == TokenClass.ReservedWord &&
-                            pool.Tokens.ElementAt(pool.Tokens.Count - 2).Id == 2)
-                            pool.Identifiers.Last().Type = state.TokenNumber;
                     pool.CodePosition++;
                     return true;
                 }
 
-                var subStateNumber = state.Transitions.Where(pair => pair.Key.Equals(symbol)).Select(pair => pair.Value).FirstOrDefault();
+                var subStateNumber = state.Transitions.Where(pair => pair.Key.Equals(symbol)).Select(pair => pair.Value)
+                    .FirstOrDefault();
 
                 if (subStateNumber != 0)
                 {
@@ -89,9 +86,7 @@ namespace Compiler.Core
         public static TokenClass? DetermineTokenClass(string symbol)
         {
             foreach (var tokenBorders in Constraints.Instance.Borders.ForTokenClasses)
-            {
                 if (tokenBorders.Value.Contains(symbol)) return tokenBorders.Key;
-            }
 
             return null;
         }

@@ -49,6 +49,7 @@
     <Compile Include="Core\CompilationPool.cs" />
     <Compile Include="Data\Constraints.cs" />
     <Compile Include="Data\Identifier.cs" />
+    <Compile Include="Data\IdentifierRule.cs" />
     <Compile Include="Data\ParsingTableState.cs" />
     <Compile Include="Data\State.cs" />
     <Compile Include="Data\Token.cs" />
@@ -85,7 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tokens.resx</DependentUpon>
     </Compile>
-    <Compile Include="Util\Parser.cs" />
+    <Compile Include="Utils\Parser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -114,6 +115,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Identifiers\CodeRules.txt" />
     <Content Include="Resources\ParsingTables\MainParsnigTable.txt" />
     <Content Include="Resources\StateMachiles\Delmers.txt" />
     <Content Include="Resources\Tokens\Delmers.txt" />

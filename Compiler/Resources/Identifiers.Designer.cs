@@ -61,7 +61,34 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 1
+        ///- 1  0 2
+        ///1
+        ///- -2 4 1
+        ///1
+        ///- -1 4 0
+        ///2
+        ///- -2 4 4.
+        /// </summary>
+        internal static string CodeRules {
+            get {
+                return ResourceManager.GetString("CodeRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to terminal:-1
+        ///fromFile:-2
+        ///append:-2
+        ///ReadSentences:-2
+        ///where:-2
+        ///firstLetter:-2
+        ///isLowerCase:-2
+        ///select:-2
+        ///parentNode:-2
+        ///count:-2
+        ///out:-2
+        ///in:-2.
         /// </summary>
         internal static string CoreLib {
             get {

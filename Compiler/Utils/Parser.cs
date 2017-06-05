@@ -4,7 +4,7 @@ using System.Linq;
 using Compiler.Core;
 using Compiler.Data;
 
-namespace Compiler.Util
+namespace Compiler.Utils
 {
     public static class Parser
     {
@@ -58,7 +58,7 @@ namespace Compiler.Util
                         .Add(new KeyValuePair<TokenClass, int>((TokenClass) int.Parse(items[1]), int.Parse(items[2])));
                     continue;
                 }
-                
+
                 var state = new ParsingTableState
                 {
                     TransitionState = int.Parse(items[0]),
@@ -71,15 +71,33 @@ namespace Compiler.Util
                 };
 
                 if (!items[1].Equals("?"))
-                {
                     state.ExpectedTokens.Add(new KeyValuePair<TokenClass, int>((TokenClass) int.Parse(items[1]),
                         int.Parse(items[2])));
-                }
 
                 stateList.Add(state);
             }
 
             return stateList;
+        }
+
+        public static ICollection<IdentifierRule> ParseIdentifierRules(string text)
+        {
+            var rules = new List<IdentifierRule>();
+
+            foreach (var items in text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)))
+            {
+                if (items.Length == 1)
+                {
+                    rules.Add(new IdentifierRule {IdentifierType = int.Parse(items[0])});
+                    continue;
+                }
+
+                rules.Last().Rules.Add(new Tuple<int, TokenClass, int>(int.Parse(items[1]),
+                    (TokenClass) int.Parse(items[2]), int.Parse(items[3])));
+            }
+
+            return rules;
         }
     }
 }

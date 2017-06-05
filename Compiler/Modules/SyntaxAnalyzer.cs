@@ -2,7 +2,7 @@
 using System.Linq;
 using Compiler.Core;
 using Compiler.Resources;
-using Compiler.Util;
+using Compiler.Utils;
 
 namespace Compiler.Modules
 {

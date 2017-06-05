@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using Compiler.Core;
-using Compiler.Data;
 using Compiler.Resources;
-using Compiler.Util;
 
 namespace Compiler
 {
@@ -15,14 +13,12 @@ namespace Compiler
         {
             try
             {
-//                Start(args);
+                Start(args);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-
-            var result = Parser.ParseTransitionsTable(ParsingTables.MainParsnigTable);
 
             Console.ReadKey();
         }

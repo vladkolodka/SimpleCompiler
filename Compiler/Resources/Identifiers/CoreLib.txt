@@ -1,7 +1,6 @@
-﻿terminal:1
+﻿terminal:-1
 fromFile:-2
 append:-2
-ReadSentences:-2
 where:-2
 firstLetter:-2
 isLowerCase:-2

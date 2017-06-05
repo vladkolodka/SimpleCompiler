@@ -17,7 +17,7 @@ namespace Compiler.Data
 
         public override bool Equals(object obj)
         {
-            if(!(obj is Token)) return false;
+            if (!(obj is Token)) return false;
 
             var token2 = (Token) obj;
 

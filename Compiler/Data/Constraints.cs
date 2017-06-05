@@ -17,11 +17,11 @@ namespace Compiler.Data
 
         public Constraints()
         {
-            Borders = new TokenBorders(new Dictionary<TokenClass, State>
+            Borders = new TokenBorders(new Dictionary<TokenClass, ICollection<string>>
             {
-                {TokenClass.ReservedWord, StateMachines.ReservedWords.ElementAt(0)},
-                {TokenClass.OperationSign, StateMachines.OperationSigns.ElementAt(0)},
-                {TokenClass.Delmer, StateMachines.Delmers.ElementAt(0)}
+                {TokenClass.ReservedWord, Tokens.ReservedWords},
+                {TokenClass.OperationSign, Tokens.OperationSigns},
+                {TokenClass.Delmer, Tokens.Delmers}
             });
         }
 
@@ -44,7 +44,7 @@ namespace Compiler.Data
             public ICollection<string> OperationSigns { get; } = Parser.ParseTokens(Resources.Tokens.OperationSigns);
             public ICollection<string> ReservedWords { get; } = Parser.ParseTokens(Resources.Tokens.ReservedWords);
             public ICollection<string> Delmers { get; } = Parser.ParseTokens(Resources.Tokens.Delmers);
-            public ICollection<char> SkippedSymbols { get; } = new List<char> {' ', /*',', ':', '#',*/ '\r', '\n'};
+            public ICollection<char> SkippedSymbols { get; } = new List<char> {' ', '\r', '\n'};
         }
 
         public class IdentifierConstraints
@@ -54,10 +54,7 @@ namespace Compiler.Data
 
         public class TokenBorders
         {
-            public IDictionary<TokenClass, IEnumerable<string>> ForTokenClasses { get; }
-            /*public List<string> ForReservedWords { get; }
-            public List<string> ForOperationSigns { get; }
-            public List<string> ForDelmers { get; }*/
+            public IDictionary<TokenClass, List<string>> ForTokenClasses { get; }
 
             public List<string> ForSpecialChars { get; } = new List<string>
             {
@@ -74,18 +71,10 @@ namespace Compiler.Data
                 "9"
             };
 
-            public TokenBorders(IDictionary<TokenClass, State> initialStates)
+            public TokenBorders(IDictionary<TokenClass, ICollection<string>> symbols)
             {
-                ForTokenClasses = initialStates.ToDictionary(pair => pair.Key,
-                    pair => pair.Value.Transitions.Select(valuePair => valuePair.Key.ToString()));
-
-
-                /*ForReservedWords = initialStates[TokenClass.ReservedWord].Transitions
-                    .Select(pair => pair.Key.ToString()).ToList();
-                ForOperationSigns = initialStates[TokenClass.OperationSign].Transitions
-                    .Select(pair => pair.Key.ToString()).ToList();
-                ForDelmers = initialStates[TokenClass.Delmer].Transitions
-                    .Select(pair => pair.Key.ToString()).ToList();*/
+                ForTokenClasses = symbols.ToDictionary(pair => pair.Key,
+                    pair => pair.Value.SelectMany(s => s.ToCharArray()).Select(c => c.ToString()).Distinct().ToList());
             }
         }
     }

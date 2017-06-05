@@ -20,7 +20,8 @@ namespace Compiler.Modules
             var line = 1;
             while (compilationPool.CodePosition < compilationPool.Code.Length)
             {
-                if (Constraints.Instance.Tokens.SkippedSymbols.Contains(compilationPool.Code[compilationPool.CodePosition]))
+                if (Constraints.Instance.Tokens.SkippedSymbols.Contains(
+                    compilationPool.Code[compilationPool.CodePosition]))
                 {
                     if (compilationPool.Code[compilationPool.CodePosition] == '\n') line++;
                     compilationPool.CodePosition++;
@@ -53,10 +54,11 @@ namespace Compiler.Modules
 
             compilationPool.Identifiers.ForEach(identifier =>
             {
-                if(!identifier.Type.HasValue) identifier.Type = 1;
+                if (!identifier.Type.HasValue) identifier.Type = 1;
             });
 
-            var identifiers = compilationPool.Identifiers.Where(identifier => char.IsLetter(identifier.Identity[0])).ToList();
+            var identifiers = compilationPool.Identifiers.Where(identifier => char.IsLetter(identifier.Identity[0]))
+                .ToList();
 
             compilationPool.Identifiers.Clear();
             compilationPool.Identifiers.AddRange(identifiers);
@@ -74,14 +76,10 @@ namespace Compiler.Modules
 
         public static string GetNextPartOfLexem(CompilationPool compilationPool)
         {
-            /*var isSymbol =
-                Constraints.Instance.Tokens.OperationSigns.Contains(
-                    compilationPool.Code[compilationPool.CodePosition].ToString());*/
-
             var tokenClass =
                 StateMachine.DetermineTokenClass(compilationPool.Code[compilationPool.CodePosition].ToString());
 
-            if(!tokenClass.HasValue) throw new Exception("Token class not determined.");
+            if (!tokenClass.HasValue) throw new Exception("Token class not determined.");
 
             var codePositionBackup = compilationPool.CodePosition;
             var count = 1;

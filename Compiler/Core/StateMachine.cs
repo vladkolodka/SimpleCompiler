@@ -39,6 +39,21 @@ namespace Compiler.Core
                     pool.CodePosition++;
                     return true;
                 }
+
+                var subStateNumber = state.Transitions.Where(pair => pair.Key.Equals(symbol)).Select(pair => pair.Value).FirstOrDefault();
+
+                if (subStateNumber != 0)
+                {
+                    var subState = _states.ElementAt(subStateNumber);
+
+                    if (!subState.Transitions.Any() && subState.IsFinal)
+                    {
+                        pool.Tokens.Add(new Token(_tokenClass, subState.TokenNumber));
+                        pool.CodePosition++;
+                        return true;
+                    }
+                }
+
                 if (!state.Transitions.ContainsKey(symbol)) return false;
                 // go to next state
                 stateNumber = state.Transitions[symbol];
@@ -66,18 +81,9 @@ namespace Compiler.Core
 
             if (Constraints.Instance.Borders.ForSpecialChars.Contains(symbol)) return false;
 
-            var result = !Constraints.Instance.Borders.ForTokenClasses
-                .Where(tokenBorders => tokenBorders.Key != tokenClass)
-                .Any(tokenBorders => tokenBorders.Value.Contains(symbol));
+            var result = Constraints.Instance.Borders.ForTokenClasses[tokenClass].Contains(symbol);
 
             return result;
-
-            /*if (Constraints.Instance.Tokens.SkippedSymbols.Contains(pool.Code[pool.CodePosition + 1])) return false;
-
-            // is current symbol belongs to token-class alphabet
-            return searchSymbol
-                ? Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString())
-                : !Constraints.Instance.Tokens.OperationSigns.Contains(pool.Code[pool.CodePosition + 1].ToString());*/
         }
 
         public static TokenClass? DetermineTokenClass(string symbol)

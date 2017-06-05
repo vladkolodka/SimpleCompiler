@@ -15,12 +15,14 @@ namespace Compiler
         {
             try
             {
-                Start(args);
+//                Start(args);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+
+            var result = Parser.ParseTransitionsTable(ParsingTables.MainParsnigTable);
 
             Console.ReadKey();
         }

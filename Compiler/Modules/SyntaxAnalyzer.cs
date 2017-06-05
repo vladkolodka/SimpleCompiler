@@ -20,6 +20,7 @@ namespace Compiler.Modules
             var stack = new Stack<int>();
             var tokens = compilationPool.Tokens;
 
+/*
             while (currentState.TransitionState != -1)
             {
                 var token = tokens.ElementAt(currentToken);
@@ -45,6 +46,7 @@ namespace Compiler.Modules
                     return false;
                 }
             }
+*/
 
             return true;
         }

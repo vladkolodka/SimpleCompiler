@@ -1,4 +1,5 @@
-﻿using Compiler.Core;
+﻿using System.Collections.Generic;
+using Compiler.Core;
 
 namespace Compiler.Data
 {
@@ -6,8 +7,13 @@ namespace Compiler.Data
     {
         // Id
         public int TransitionState { get; set; }
+/*
         public TokenClass Class { get; set; }
         public int NumberInClass { get; set; }
+*/
+
+        public ICollection<KeyValuePair<TokenClass, int>> ExpectedTokens { get; set; } = new List<KeyValuePair<TokenClass, int>>();
+
         public int TransisionStateNumber { get; set; }
         public bool IsAcceptRequired { get; set; }
         public int? PushToStack { get; set; }

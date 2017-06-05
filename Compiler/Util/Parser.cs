@@ -16,7 +16,7 @@ namespace Compiler.Util
             {
                 var blocks = line.Split(' ');
 
-                if(blocks[0].Equals("--")) continue;
+                if (blocks[0].Equals("--")) continue;
 
                 // transition declaration
                 if (blocks[0].Equals(string.Empty))
@@ -46,21 +46,40 @@ namespace Compiler.Util
 
         public static ICollection<ParsingTableState> ParseTransitionsTable(string text)
         {
-            return text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                .Select(state => state.Split(new[]{' '}, StringSplitOptions.RemoveEmptyEntries))
-                .Select(items => new ParsingTableState
+            var stateList = new List<ParsingTableState>();
+            var blockLines = text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries));
+
+            foreach (var items in blockLines)
+            {
+                if (items.Length == 3)
+                {
+                    stateList.Last().ExpectedTokens
+                        .Add(new KeyValuePair<TokenClass, int>((TokenClass) int.Parse(items[1]), int.Parse(items[2])));
+                    continue;
+                }
+                
+                var state = new ParsingTableState
                 {
                     TransitionState = int.Parse(items[0]),
-                    Class = (TokenClass) int.Parse(items[1]),
-                    NumberInClass = int.Parse(items[2]),
                     TransisionStateNumber = int.Parse(items[3]),
                     IsAcceptRequired = items[4].Equals("+"),
                     PushToStack = items[5].Equals("-") ? null : new int?(int.Parse(items[5])),
                     IsPopFromStackRequired = items[6].Equals("+"),
                     IsErrorOccured = items[7].Equals("+"),
                     IsNullable = items.Length >= 9 && items[8].Equals("!")
-                })
-                .ToList();
+                };
+
+                if (!items[1].Equals("?"))
+                {
+                    state.ExpectedTokens.Add(new KeyValuePair<TokenClass, int>((TokenClass) int.Parse(items[1]),
+                        int.Parse(items[2])));
+                }
+
+                stateList.Add(state);
+            }
+
+            return stateList;
         }
     }
 }

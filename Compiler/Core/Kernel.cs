@@ -17,7 +17,7 @@ namespace Compiler.Core
 
             // create compiler modules chain
             _modules.Add(new LexicalAnalyzer());
-//            _modules.Add(new SyntaxAnalyzer());
+            _modules.Add(new SyntaxAnalyzer());
 //            _modules.Add(new CodeGenerator());
         }
 

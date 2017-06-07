@@ -6,7 +6,7 @@ namespace Compiler.Data
     public class ParsingTableState
     {
         // Id
-        public int TransitionState { get; set; }
+        public int Id { get; set; }
 
         public ICollection<KeyValuePair<TokenClass, int>> ExpectedTokens { get; set; } =
             new List<KeyValuePair<TokenClass, int>>();

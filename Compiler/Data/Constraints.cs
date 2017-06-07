@@ -23,6 +23,7 @@ namespace Compiler.Data
         public TokenConstraint Tokens { get; } = new TokenConstraint();
         public IdentifierConstraints Identifiers { get; } = new IdentifierConstraints();
         public TokenBorders Borders { get; }
+        public TransitionTables Tables { get; } = new TransitionTables();
 
         public static Constraints Instance => _instance ?? (_instance = new Constraints());
 
@@ -43,7 +44,7 @@ namespace Compiler.Data
             public ICollection<string> OperationSigns { get; } = Parser.ParseTokens(Resources.Tokens.OperationSigns);
             public ICollection<string> ReservedWords { get; } = Parser.ParseTokens(Resources.Tokens.ReservedWords);
             public ICollection<string> Delmers { get; } = Parser.ParseTokens(Resources.Tokens.Delmers);
-            public ICollection<char> SkippedSymbols { get; } = new List<char> {' ', '\r', '\n'};
+            public ICollection<char> SkippedSymbols { get; } = new List<char> {' ', '\r', '\n', '\t'};
         }
 
         public class IdentifierConstraints
@@ -78,6 +79,10 @@ namespace Compiler.Data
                 "8",
                 "9"
             };
+        }
+        public class TransitionTables
+        {
+            public ICollection<ParsingTableState> MainTable { get; } = Parser.ParseTransitionsTable(Resources.ParsingTables.MainParsnigTable);
         }
     }
 }

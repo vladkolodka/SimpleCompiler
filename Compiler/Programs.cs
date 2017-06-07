@@ -11,14 +11,14 @@ namespace Compiler
     {
         private static void Main(string[] args)
         {
-            try
-            {
+//            try
+//            {
                 Start(args);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+//            }
+//            catch (Exception e)
+//            {
+//                Console.WriteLine(e);
+//            }
 
             Console.ReadKey();
         }

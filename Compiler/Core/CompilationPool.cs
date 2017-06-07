@@ -16,7 +16,6 @@ namespace Compiler.Core
         public List<Identifier> Identifiers { get; } = new List<Identifier>();
 
         public List<Token> Tokens { get; } = new List<Token>();
-        public List<string> Literals { get; } = new List<string>();
         public string Code { get; set; }
         public string FileName { get; set; }
         public int CodePosition { get; set; } = 0;

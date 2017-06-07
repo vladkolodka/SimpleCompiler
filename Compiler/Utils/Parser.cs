@@ -61,10 +61,10 @@ namespace Compiler.Utils
 
                 var state = new ParsingTableState
                 {
-                    TransitionState = int.Parse(items[0]),
-                    TransisionStateNumber = int.Parse(items[3]),
+                    Id = int.Parse(items[0]) - 1,
+                    TransisionStateNumber = int.Parse(items[3]) - 1,
                     IsAcceptRequired = items[4].Equals("+"),
-                    PushToStack = items[5].Equals("-") ? null : new int?(int.Parse(items[5])),
+                    PushToStack = items[5].Equals("-") ? null : new int?(int.Parse(items[5]) - 1),
                     IsPopFromStackRequired = items[6].Equals("+"),
                     IsErrorOccured = items[7].Equals("+"),
                     IsNullable = items.Length >= 9 && items[8].Equals("!")

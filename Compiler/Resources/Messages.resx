@@ -135,4 +135,10 @@
   <data name="IdentyfierNotDefined" xml:space="preserve">
     <value>{0}|-4|{1}|Identifier not defined. </value>
   </data>
+  <data name="ParsingError" xml:space="preserve">
+    <value>{0}|-5||Parsing completed with errors.</value>
+  </data>
+  <data name="ParsingSuccessful" xml:space="preserve">
+    <value>{0}|3||Parsing completed successfully.</value>
+  </data>
 </root>

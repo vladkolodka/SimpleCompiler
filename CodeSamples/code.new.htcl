@@ -1,0 +1,21 @@
+@<Main : ()
+	<
+		MyDocument as blockPr = ReadDocument(S as text ="document.txt")#
+		; append 10 sentences to document from user input
+
+		Se as blockPr = ReadSentences(N as number = 10)#
+		Res as text = DoWork1(X as blockPr = Se)#
+
+		; Select blocks where first letter in lower case
+		Words as blockListN = DoWork2(Type as text = "firstLetter")#
+		Words as blockListN = Words@select(S as text = "parentNode")#
+
+		(Words@select(S as text = "count") equals 5) yes
+		<
+			TerminalOut(W as blockListN = Words)#
+		> no
+		<
+			TerminalOut(S as text = "Not found!")#
+		>
+	> 
+>

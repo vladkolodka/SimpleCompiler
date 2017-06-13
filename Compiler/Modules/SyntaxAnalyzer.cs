@@ -52,7 +52,7 @@ namespace Compiler.Modules
                 else if (state.IsErrorOccured)
                 {
                     // TODO throw error
-                    Errors.Add(
+                            Errors.Add(
                         $"Syntax error : {_pool.Tokens[currentTokenIndex].Class}, {_pool.Tokens[currentTokenIndex].Id}, {_pool.Tokens[currentTokenIndex].Value} : {currentTokenIndex}. Expected: {string.Join("\n", state.ExpectedTokens.Select(pair => $"{pair.Key} : {pair.Value}"))}");
                     return false;
                 }
@@ -67,6 +67,8 @@ namespace Compiler.Modules
         private bool IsTokenExpected(ParsingTableState state, int tokenIndex)
         {
             if (state.IsNullable) return true;
+
+            if (tokenIndex >= _pool.Tokens.Count) return true;
 
             var type = _pool.Tokens[tokenIndex].Class == TokenClass.Identifier
                 ? _pool.Identifiers[_pool.Tokens[tokenIndex].Id].Type

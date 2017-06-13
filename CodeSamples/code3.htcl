@@ -1,0 +1,26 @@
+@<TestName
+    MyDocument as blockPr = terminal@fromFile("document.txt") #
+    ; append 10 sentences to document from user input
+
+    MyDocument@append(ReadSentences(10))#
+
+    ; Select blocks where first letter in lower case
+    Words as ? = MyDocument@where(firstLetter, value@isLowerCase() equals on)
+    @select(parentNode)#
+
+    (Words@select(count) > 0) yes
+    @<
+        terminal@out(Words)#
+    > no
+    @<
+        terminal@out("Not found!")#
+    >
+>
+@<ReadSentences : number Args
+    Sentences as blockPr#
+    I as number = 0#
+    (5) loop
+    <
+        Sentences@append(terminal@in())#
+    >
+Sentences>

@@ -68,6 +68,7 @@ namespace Compiler.Modules
         {
             if (state.IsNullable) return true;
 
+            if (tokenIndex >= _pool.Tokens.Count && !state.IsNullable) return false;
             if (tokenIndex >= _pool.Tokens.Count) return true;
 
             var type = _pool.Tokens[tokenIndex].Class == TokenClass.Identifier

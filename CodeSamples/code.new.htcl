@@ -19,3 +19,15 @@
 		>
 	> 
 >
+
+@<ReadSentences : (Args as number = 1)
+    <
+		Sentences as blockPr = 0#
+		I as number = 0#
+		loop (I equals 0)
+		<
+			Te as text = TerminalIn()#
+			T as blockPr = Sentences@append(S as text = Te)#
+		>
+	>
+@Sentences>

@@ -20,7 +20,7 @@ namespace Compiler
 //                Console.WriteLine(e);
 //            }
 
-            Console.ReadKey();
+//            Console.ReadKey();
         }
 
         private static void Start(IReadOnlyCollection<string> fileNames)

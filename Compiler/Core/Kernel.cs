@@ -30,7 +30,7 @@ namespace Compiler.Core
                 {
                     if (module.TryBypass(pool))
                     {
-                        Console.Write(string.Join("\n", module.Messages));
+                        Console.WriteLine(string.Join("\n", module.Messages));
                         continue;
                     }
                 }

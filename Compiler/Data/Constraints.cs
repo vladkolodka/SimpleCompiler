@@ -8,7 +8,7 @@ namespace Compiler.Data
     public class Constraints
     {
         private static Constraints _instance;
-        
+
         public Constraints()
         {
             Borders = new TokenBorders(new Dictionary<TokenClass, ICollection<string>>
@@ -45,6 +45,26 @@ namespace Compiler.Data
             public ICollection<string> ReservedWords { get; } = Parser.ParseTokens(Resources.Tokens.ReservedWords);
             public ICollection<string> Delmers { get; } = Parser.ParseTokens(Resources.Tokens.Delmers);
             public ICollection<char> SkippedSymbols { get; } = new List<char> {' ', '\r', '\n', '\t'};
+
+            public string ToString(TokenClass classNumber, int tokenNumber)
+            {
+                var token = "?";
+
+                switch (classNumber)
+                {
+                    case TokenClass.ReservedWord:
+                        token = ReservedWords.ElementAt(tokenNumber);
+                        break;
+                    case TokenClass.OperationSign:
+                        token = OperationSigns.ElementAt(tokenNumber);
+                        break;
+                    case TokenClass.Delmer:
+                        token = Delmers.ElementAt(tokenNumber);
+                        break;
+                }
+
+                return $"{classNumber}:{token}";
+            }
         }
 
         public class IdentifierConstraints
@@ -80,9 +100,11 @@ namespace Compiler.Data
                 "9"
             };
         }
+
         public class TransitionTables
         {
-            public ICollection<ParsingTableState> MainTable { get; } = Parser.ParseTransitionsTable(Resources.ParsingTables.MainParsnigTable);
+            public ICollection<ParsingTableState> MainTable { get; } =
+                Parser.ParseTransitionsTable(Resources.ParsingTables.MainParsnigTable);
         }
     }
 }

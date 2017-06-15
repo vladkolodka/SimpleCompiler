@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows;
 using SimpleIDE.Data;
 
 namespace SimpleIDE.Core
@@ -63,6 +64,9 @@ namespace SimpleIDE.Core
                     case 2:
                         Identifiers.Add(new KeyValuePair<int, string>(Convert.ToInt32(parameters[0]), parameters[1]));
                         break;
+                    case 3:
+                        MessageBox.Show(blocks[3]);
+                        break;
                 }
             if (code >= 0) return;
 
@@ -86,6 +90,15 @@ namespace SimpleIDE.Core
                     {
                         FileName = blocks[0],
                         Description = $"Identifier type {parameters[0]} is not defined.",
+                        Message = blocks[3],
+                        Code = code
+                    });
+                    break;
+                case 5:
+                    Errors.Add(new Error
+                    {
+                        FileName = blocks[0],
+                        Description = $"Expected: {parameters[0]}, found: {parameters[1]}",
                         Message = blocks[3],
                         Code = code
                     });

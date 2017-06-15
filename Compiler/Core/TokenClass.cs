@@ -6,7 +6,6 @@
         OperationSign,
         Identifier,
         Literal,
-        Delmer,
-        Special
+        Delmer
     }
 }

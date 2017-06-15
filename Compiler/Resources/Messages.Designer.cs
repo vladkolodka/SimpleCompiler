@@ -97,7 +97,7 @@ namespace Compiler.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}|-5||Parsing completed with errors..
+        ///   Looks up a localized string similar to {0}|-5|{1} {2}|Parsing completed with errors..
         /// </summary>
         internal static string ParsingError {
             get {

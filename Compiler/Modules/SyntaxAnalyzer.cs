@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Compiler.Core;
 using Compiler.Data;
@@ -19,10 +18,8 @@ namespace Compiler.Modules
             var currentTokenIndex = 0;
             var stack = new Stack<int>();
 
-            // 25
             do
             {
-                Console.WriteLine(currentStateIndex);
                 var state = table.ElementAt(currentStateIndex);
 
                 if (IsTokenExpected(table.ElementAt(currentStateIndex), currentTokenIndex))
@@ -38,28 +35,36 @@ namespace Compiler.Modules
 
                     if (state.IsAcceptRequired) currentTokenIndex++;
 
-                    try
-                    {
-                        currentStateIndex = state.IsPopFromStackRequired ? stack.Pop() : state.TransisionStateNumber;
-                    }
-                    catch (InvalidOperationException e)
-                    {
-                        // TODO
-                        Errors.Add("Pop from stack");
-                        return false;
-                    }
+//                    try
+//                    {
+                    currentStateIndex = state.IsPopFromStackRequired ? stack.Pop() : state.TransisionStateNumber;
+//                    }
+//                    catch (InvalidOperationException)
+//                    {
+//                         TODO
+//                        Errors.Add("Pop from stack");
+//                        return false;
+//                    }
                 }
                 else if (state.IsErrorOccured)
                 {
-                    // TODO throw error
-                            Errors.Add(
-                        $"Syntax error : {_pool.Tokens[currentTokenIndex].Class}, {_pool.Tokens[currentTokenIndex].Id}, {_pool.Tokens[currentTokenIndex].Value} : {currentTokenIndex}. Expected: {string.Join("\n", state.ExpectedTokens.Select(pair => $"{pair.Key} : {pair.Value}"))}");
+                    var expected = state.ExpectedTokens.FirstOrDefault();
+                    
+                    Errors.Add(string.Format(Resources.Messages.ParsingError, _pool.FileName,
+                        state.ExpectedTokens.Any()
+                            ? Constraints.Instance.Tokens.ToString(expected.Key, expected.Value)
+                            : "-", Constraints.Instance.Tokens.ToString(_pool.Tokens[currentTokenIndex].Class, _pool.Tokens[currentTokenIndex].Id)));
+//                    Errors.Add(
+//                        $"Syntax error : {_pool.Tokens[currentTokenIndex].Class}, {_pool.Tokens[currentTokenIndex].Id}, {_pool.Tokens[currentTokenIndex].Value} : {currentTokenIndex}. Expected: {string.Join("\n", state.ExpectedTokens.Select(pair => $"{pair.Key} : {pair.Value}"))}");
                     return false;
                 }
-                else currentStateIndex++;
+                else
+                {
+                    currentStateIndex++;
+                }
             } while (currentStateIndex != -1);
 
-            Messages.Add("Syntax analyzer: success.");
+//            Messages.Add("Syntax analyzer: success.");
 
             return true;
         }
